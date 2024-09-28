@@ -8,15 +8,14 @@ It provides a one step solution to prepare for job interviews, access new opport
 
 # Task division
 
-## Abhay/Ayush
-shortlist UI/UX designs which aligns with our project, choose professional designs. Drop links of shortlisted UI/UX here.
-**Deadline** 29 sept, 2024 (Sunday)
 
-## Shreya
-Learn how to work on django and replicate resume parsing module.
-
-## Rishabh
-openAI intergration
-figure out how openAI will take skillset as input and generate top interview questions.
-**deadline** 29 sept,2024 (Sunday)
+  ## Abhay/Ayush
+    Shortlist UI/UX designs which aligns with our project, choose professional designs.Drop links of shortlisted UI/UX here.<br>**Deadline** 29 sept, 2024 (Sunday)
+  
+  ## Shreya
+    Learn how to work on django and replicate resume parsing module.
+  
+  ## Rishabh
+    OpenAI intergration<br>
+    Figure out how openAI will take skillset as input and generate top interview questions.<br>**Deadline** 29 sept,2024 (Sunday)
 
