@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        #parsed-data {
+            margin-top: 20px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }        
+    </style>
+    
+</head>
+<body>
+    <h2>Upload Your Resume</h2>
+    <form id="resume-form" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <input type="file" name="resume" accept=".pdf" required>
+        <button type="submit" id="upload-button">Upload</button>
+    </form>
+
+    <div id="parsed-data"></div>
+    <div id="pdf-container"></div>
+    <script src="{%static 'js/script.js' %}"></script>
+</body>
+</html>

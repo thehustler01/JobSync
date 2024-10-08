@@ -2,6 +2,7 @@ let currentQuestionIndex = 0; // Track the current question index
 let questions = []; // Store questions
 let userAnswer = ""; // Store user's answer
 
+
 document.getElementById('interviewForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -148,4 +149,95 @@ document.getElementById('retryButton').addEventListener('click', function() {
 // Quit button functionality
 document.getElementById('quitButton').addEventListener('click', function() {
    alert("Exiting the interview.");
+});
+
+//Resume Uploading Functionality
+const iframeContainer = document.getElementById('pdf-container'); 
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('resume-form'); 
+    const uploadButton = document.getElementById('upload-button'); 
+
+    uploadButton.addEventListener('click', function(event) {
+        event.preventDefault(); 
+        
+        if (form.checkValidity()) { 
+            const formData = new FormData(form); 
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken') 
+                }
+            })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.success) {
+    //                 displayParsedData(data.parsed_data); 
+    //             } else {
+    //                 alert(data.error);
+    //             }
+    //         })
+    //         .catch(error => console.error('Error:', error));
+    //     } else {
+    //         alert('Please select a valid resume file.');
+    //     }
+    .then(response => {
+        if (response.ok) {
+            return response.blob();  // Get the PDF as a Blob
+        } else {
+            alert('Error uploading file.');
+            return null;
+        }
+    })
+    .then(blob => {
+        if (blob) {
+            // Create a URL for the Blob and set it as the iframe src
+            const fileUrl = URL.createObjectURL(blob);
+            displayPDF(fileUrl); 
+        }
+    })
+    .catch(error => console.error('Error:', error));
+} else {
+    alert('Please select a valid resume file.');
+}
+});
+
+function displayPDF(fileUrl) {
+    // Display the PDF in an iframe
+    iframeContainer.innerHTML = '';  // Clear any previous content
+    const iframe = document.createElement('iframe');
+    iframe.src = fileUrl;
+    iframe.width = '100%';
+    iframe.height = '600px';
+    iframeContainer.appendChild(iframe);
+}
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function displayParsedData(parsedData) {
+        const dataContainer = document.getElementById('parsed-data'); 
+        dataContainer.innerHTML = ''; 
+
+        const ul = document.createElement('ul');
+        for (const [key, value] of Object.entries(parsedData)) {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${key}:</strong> ${value}`;
+            ul.appendChild(li);
+        }
+        dataContainer.appendChild(ul);
+    }
 });
