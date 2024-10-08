@@ -34,7 +34,7 @@
 
 import tempfile
 from django.shortcuts import render
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 def get_resume(request):
@@ -43,8 +43,8 @@ def get_resume(request):
 
 @csrf_exempt
 def upload_resume(request):
-    if request.method == 'POST' and request.FILES['file']:
-        resume = request.FILES['file']
+    if request.method == 'POST' and request.FILES['resume']:
+        resume = request.FILES['resume']
         
         # Save the file temporarily
         with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
@@ -54,6 +54,6 @@ def upload_resume(request):
             temp_file.flush()  # Ensure the file is written
 
         # Serve the file for display in browser
-        return FileResponse(open(temp_file.name, 'rb'), content_type='application/pdf')
+        return JsonResponse({'success':True,'pdf_url': temp_file.name})
 
     return render(request, 'resumeParser.html')

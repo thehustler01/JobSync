@@ -152,7 +152,7 @@ document.getElementById('quitButton').addEventListener('click', function() {
 });
 
 //Resume Uploading Functionality
-const iframeContainer = document.getElementById('pdf-container'); 
+const pdfFrame= document.getElementById('pdf-container'); 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('resume-form'); 
     const uploadButton = document.getElementById('upload-button'); 
@@ -170,38 +170,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-CSRFToken': getCookie('csrftoken') 
                 }
             })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.success) {
-    //                 displayParsedData(data.parsed_data); 
-    //             } else {
-    //                 alert(data.error);
-    //             }
-    //         })
-    //         .catch(error => console.error('Error:', error));
-    //     } else {
-    //         alert('Please select a valid resume file.');
-    //     }
-    .then(response => {
-        if (response.ok) {
-            return response.blob();  // Get the PDF as a Blob
+            .then(response => response.json())
+            .then(async data => {
+                if (data.success) {
+                    const pdfResponse = await fetch(data.pdf_url); // Fetch the PDF URL
+                    // console.log(pdfResponse);
+                    const pdfText = await pdfResponse.text(); // Get the text content
+                    pdfFrame.src = 'data:application/pdf;base64,' + btoa(pdfText); 
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
         } else {
-            alert('Error uploading file.');
-            return null;
+            alert('Please select a valid resume file.');
         }
-    })
-    .then(blob => {
-        if (blob) {
-            // Create a URL for the Blob and set it as the iframe src
-            const fileUrl = URL.createObjectURL(blob);
-            displayPDF(fileUrl); 
-        }
-    })
-    .catch(error => console.error('Error:', error));
-} else {
-    alert('Please select a valid resume file.');
-}
-});
+    });
+//     .then(response => {
+//         if (response.ok) {
+//             return response.blob();  // Get the PDF as a Blob
+//         } else {
+//             alert('Error uploading file.');
+//             return null;
+//         }
+//     })
+//     .then(blob => {
+//         if (blob) {
+//             // Create a URL for the Blob and set it as the iframe src
+//             const fileUrl = URL.createObjectURL(blob);
+//             displayPDF(fileUrl); 
+//         }
+//     })
+//     .catch(error => console.error('Error:', error));
+// } else {
+//     alert('Please select a valid resume file.');
+// }
+// });
 
 function displayPDF(fileUrl) {
     // Display the PDF in an iframe
