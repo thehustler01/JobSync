@@ -19,3 +19,4 @@ It provides a one step solution to prepare for job interviews, access new opport
   OpenAI intergration<br>
   Figure out how openAI will take skillset as input and generate top interview questions.<br>**Deadline** 29 sept,2024 (Sunday)
 
+Samplllleeee Commmiiittttt
