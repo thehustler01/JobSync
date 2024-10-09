@@ -7,9 +7,7 @@
 # from django.views.decorators.csrf import csrf_exempt
 # # nlp = spacy.load("en_core_web_sm")
 
-# def get_resume(request):
-#     print("Request received")
-#     return HttpResponse("hiiiiiiiiiiiii")
+
 # def upload_resume(request):
     
 #     if request.method == 'POST' and request.FILES['file']:
@@ -34,26 +32,27 @@
 
 import tempfile
 from django.shortcuts import render
+from django.conf import settings
 from django.http import HttpResponse, FileResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import FileSystemStorage
 
-def get_resume(request):
-    print("Request received")
-    return HttpResponse("hiiiiiiiiiiiii")
 
 @csrf_exempt
 def upload_resume(request):
     if request.method == 'POST' and request.FILES['resume']:
         resume = request.FILES['resume']
         
-        # Save the file temporarily
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
-            # Write the uploaded PDF file to the temporary file
-            for chunk in resume.chunks():
-                temp_file.write(chunk)
-            temp_file.flush()  # Ensure the file is written
+        # Save the uploaded file to MEDIA_ROOT
+        fs = FileSystemStorage()
+        filename = fs.save(resume.name, resume)
+        file_url = fs.url(filename)
 
-        # Serve the file for display in browser
-        return JsonResponse({'success':True,'pdf_url': temp_file.name})
-
+        # Return the file URL in the JSON response
+        return JsonResponse({
+            'success': True,
+            'pdf_url': file_url
+        })
+    
+        # return JsonResponse({'success': False, 'error': 'No file uploaded'})
     return render(request, 'resumeParser.html')
