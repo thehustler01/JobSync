@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('interview/', include('interviewModule.urls')),
+    path('scrape_jobs/', include('scrapingModule.urls')),
     path('', include('parsingModule.urls')), 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
