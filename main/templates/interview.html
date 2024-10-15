@@ -1,11 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mock Interview</title>
-    <link rel="stylesheet" href="../static/css/styles.css">
-   
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
 </head>
 <body>
 
@@ -50,7 +51,7 @@
 
 
 
-    <!-- <div class="container">
+    <div class="container">
         <h1>Mock Interview</h1>
         <form id="interviewForm">
             <label for="job_role">Job Role:</label>
@@ -76,9 +77,11 @@
             <button id="nextButton" class="hidden">Next Question</button>
             <button id="quitButton" class="">Quit</button>
         </div>
-    </div> -->
+    </div>
 
-    <!-- {% comment %} <script src="../static/js/script.js"></script> {% endcomment %} -->
-	 <script src="../static/js/script.js"></script>
+   
+	 <script src="{% static ''../js/script.js'%}"></script>
+     <script src="{% static ''../js/frontend_script'%}"></script>
+     
 </body>
 </html>
