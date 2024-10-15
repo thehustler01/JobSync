@@ -4,48 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mock Interview</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="../static/css/styles.css">
    
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-custom navbar-mainbg">
-        <a class="navbar-brand navbar-logo" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars text-white"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+	
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="nav-logo">Jobsync</a>
+            <ul class="nav-menu">
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Address Book</a>
+                    <a href="#" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
+                    <a href="#" class="nav-link">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
+                    <a href="#" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                    <a href="#" class="nav-link">Contact</a>
                 </li>
             </ul>
-        </div>
-    </nav>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+	<section id="home">
+		<div id="home_left">
+			<h1>Optimize your resume to get more interviews</h1>
+			<p>JobSync helps you optimize your resume for any job, highlighting the key experience and skills recruiters need to see.</p>
+			<button class="button1"><strong>Scan Your Resume</strong></button>
+		</div>
+		<div id="home_right">
+			<img src="../static/img/new_power_edit.webp" alt="">
+		</div>
+	</section>
+
+	
 
 
 
-
-
-
-
-    <div class="container">
+    <!-- <div class="container">
         <h1>Mock Interview</h1>
         <form id="interviewForm">
             <label for="job_role">Job Role:</label>
@@ -69,10 +74,11 @@
             <div id="suggestionsContainer" class="hidden"></div>
             <div id="idealAnswerContainer" class="hidden"></div>
             <button id="nextButton" class="hidden">Next Question</button>
-            <button id="quitButton" class="">Quit</button> <!-- Quit button always visible -->
+            <button id="quitButton" class="">Quit</button>
         </div>
-    </div>
+    </div> -->
 
-    {% comment %} <script src="../static/js/script.js"></script> <!-- Make sure to include your JS file --> {% endcomment %}
+    <!-- {% comment %} <script src="../static/js/script.js"></script> {% endcomment %} -->
+	 <script src="../static/js/script.js"></script>
 </body>
 </html>
