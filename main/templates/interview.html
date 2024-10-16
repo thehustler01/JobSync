@@ -61,8 +61,59 @@
             margin-top: 20px;
         }
     </style>
+    <link rel="stylesheet" href="../static/css/voice_style.css">
 </head>
 <body>
+
+    <section id="voice">
+        <h1>Web Speech API</h1>
+
+        <div id="info">
+            <p id="info_start">Click on the microphone icon and begin speaking</p>
+            <p id="info_speak_now">Speak now.</p>
+            <p id="info_no_speech">No speech was detected. You may need to adjust your microphone settings.</p>
+            <p id="info_no_microphone" style="display:none">No microphone was found. Ensure that a microphone is installed and that settings are configured correctly.</p>
+            <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+            <p id="info_denied">Permission to use microphone was denied.</p>
+            <p id="info_blocked">Permission to use microphone is blocked.</p>
+            <p id="info_upgrade">Web Speech API is not supported by this browser.</p>
+        </div>
+
+        <div id="results">
+            <span id="final_span" class="final"></span>
+            <span id="interim_span" class="interim"></span>
+            <p>
+        </div>
+
+        <div class="center">
+            <button id="start_button" onclick="startButton(event)">
+                <img id="start_img" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0V0z%22%2F%3E%3Cpath%20d%3D%22M12%2015c1.66%200%202.99-1.34%202.99-3L15%206c0-1.66-1.34-3-3-3S9%204.34%209%206v6c0%201.66%201.34%203%203%203zm-1.2-9.1c0-.66.54-1.2%201.2-1.2s1.2.54%201.2%201.2l-.01%206.2c0%20.66-.53%201.2-1.19%201.2s-1.2-.54-1.2-1.2V5.9zm6.5%206.1c0%203-2.54%205.1-5.3%205.1S6.7%2015%206.7%2012H5c0%203.41%202.72%206.23%206%206.72V22h2v-3.28c3.28-.48%206-3.3%206-6.72h-1.7z%22%2F%3E%3C%2Fsvg%3E" alt="Start">
+            </button>
+        </div>
+
+        <div class="center">
+        <!-- <div class="sidebyside" style="text-align:right">
+            <button id="copy_button" class="button" onclick="copyButton()">
+            Copy and Paste</button>
+            <div id="copy_info" class="info">
+            Press Control-C to copy text.<br>(or Command-C.)
+            </div>
+        </div> -->
+        
+        <p>
+            
+        <div id="div_language">
+            <select id="select_language" onchange="updateCountry()"></select>
+            &nbsp;&nbsp;
+            <select id="select_dialect"></select>
+        </div>
+        
+        </div>
+    </section>
+    
+
+
+
     <div class="container">
         <h1>Mock Interview</h1>
         <form id="interviewForm">
@@ -92,5 +143,6 @@
     </div>
 
     <script src="{% static 'js/script.js' %}"></script> <!-- Make sure to include your JS file -->
+    <script src="../static/js/voice.js"></script>
 </body>
 </html>
