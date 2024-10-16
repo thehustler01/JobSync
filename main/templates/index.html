@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Interview</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body>
+
+	
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="nav-logo">Jobsync</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+	<section id="home">
+		<div id="home_left">
+			<h1>Optimize your resume to get more interviews</h1>
+			<p>JobSync helps you optimize your resume for any job, highlighting the key experience and skills recruiters need to see.</p>
+			<button class="button1"><strong>Scan Your Resume</strong></button>
+		</div>
+		<div id="home_right">
+			<img src="../static/img/new_power_edit.webp" alt="">
+		</div>
+	</section>
+
+	
+
+
+
+    <div class="container">
+        <h1>Mock Interview</h1>
+        <form id="interviewForm">
+            <label for="job_role">Job Role:</label>
+            <input type="text" id="job_role" name="job_role" required placeholder="Enter job role">
+
+            <label for="skills">Skills (comma-separated):</label>
+            <input type="text" id="skills" name="skills" required placeholder="Enter skills">
+
+            <button type="submit">Start Mock Interview</button>
+        </form>
+
+        <div id="questionsContainer" class="hidden">
+            <div id="currentQuestion"></div>
+            <div id="answerContainer" class="hidden">
+                <strong>Your Answer:</strong>
+                <div id="userAnswer"></div>
+                <button id="recordButton">Hold to Record</button>
+                <button id="retryButton" class="hidden">Retry Answer</button>
+                <button id="submitResponseButton" class="hidden">Submit Response</button>
+            </div>
+            <div id="suggestionsContainer" class="hidden"></div>
+            <div id="idealAnswerContainer" class="hidden"></div>
+            <button id="nextButton" class="hidden">Next Question</button>
+            <button id="quitButton" class="">Quit</button>
+        </div>
+    </div>
+
+   
+	 <script src="{% static ''../js/script.js'%}"></script>
+     <script src="{% static ''../js/frontend_script'%}"></script>
+     
+</body>
+</html>
