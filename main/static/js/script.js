@@ -206,8 +206,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-
+                            console.log(data.pdf_url);
                             pdfFrame.src = data.pdf_url;
+                            extracted_text=data.extracted_text;
+                            console.log(extracted_text);
                             // displayParsedData(parsedData);
 
                         } else {
