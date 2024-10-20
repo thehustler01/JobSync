@@ -7,3 +7,5 @@ pyttsx3==2.98
 resume-parser==0.8.4
 spacy==3.8.2
 SpeechRecognition==3.10.4
+psycopg2==2.9.10
+psycopg2-binary==2.9.10
