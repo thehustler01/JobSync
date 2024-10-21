@@ -3,7 +3,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import os
-
+from .models import JobRole,Recommendation
+from .views import resume_details
 
 def recommend_job(skillset):
 
@@ -36,6 +37,10 @@ def recommend_job(skillset):
     User_skillset=list(map(str.lower,User_skillset))
 
     missing_skills = set(job_skillset) - set(User_skillset)
+    suggested_job=JobRole(role_name=jobRole,required_skills=job_skillset,missing_skills=list(missing_skills))
+    suggested_job.save()
+    recommend=Recommendation(job_role_id=suggested_job.id, resume_id=resume_details.id)
+    recommend.save()
     print(job_skillset)
     print(User_skillset)
     print(missing_skills)

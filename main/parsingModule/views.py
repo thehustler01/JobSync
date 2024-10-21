@@ -16,6 +16,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from .job_matching import recommend_job
+from .models import Resume
 
 
 skillset=[]
@@ -29,7 +30,6 @@ def upload_resume(request):
         filename = fs.save(resume.name, resume)
         file_url = fs.url(filename)
         file_path = fs.path(filename)
-     
 
         if file_path.endswith('.docx'):
             Res_text = doc2text(file_path )
@@ -41,16 +41,23 @@ def upload_resume(request):
 
 
         nlp = spacy.load('en_core_web_sm')
-        matcher = Matcher(nlp.vocab)
+        selfMatcher = Matcher(nlp.vocab)
         text=' '.join(Res_text.split())
 
         newNlp = nlp(text)
         noun_chunks = list(newNlp.noun_chunks)
        
-        
+        # name=extract_name(newNlp,matcher=selfMatcher)
         skillset=extract_skills(newNlp, noun_chunks)
         email=extract_email(text)
         phone=extract_mobile_number(text)
+
+        resume_details = Resume(
+        original_filename=filename,
+        skills=skillset,  
+        email=email,
+        phone_number=phone)
+        resume_details.save()
 
         recommend_job(skillset)
        
@@ -60,6 +67,7 @@ def upload_resume(request):
         print(".........................")
         print(phone)
         print("..........................")
+        # print(name)
        
         return JsonResponse({
             'success': True,
@@ -121,7 +129,7 @@ def extract_email(text):
 
 def extract_name(nlp_text, matcher):
     NAME_PATTERN      = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
-    pattern = NAME_PATTERN
+    pattern = [NAME_PATTERN]
     
     matcher.add('NAME',None,*pattern)
     
@@ -129,7 +137,8 @@ def extract_name(nlp_text, matcher):
     
     for match_id, start, end in matches:
         span = nlp_text[start:end]
-        return span.text
+        if 'name' not in span.text.lower():
+            return span.text
 
 def extract_mobile_number(text):
     
@@ -140,4 +149,4 @@ def extract_mobile_number(text):
             return '+' + number
         else:
             return number
-        
+
