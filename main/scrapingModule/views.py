@@ -24,8 +24,8 @@ def scrape_website(request):
 
     service = Service('./drivers/chromedriver.exe')
     
-    driver = webdriver.Chrome(service=service, options=chrome_options)
-    # driver = webdriver.Chrome(service=service)
+    # driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = webdriver.Chrome(service=service)
 
     # Step 1: Load cookies if they exist
     if os.path.exists("linkedin_cookies.pkl"):
