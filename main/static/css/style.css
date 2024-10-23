@@ -1,4 +1,4 @@
-/********** Template CSS **********/
+This is the modifed text/**** Template CSS ****/
 :root {
     --primary: #354995;
     --secondary: #FBA504;
@@ -7,7 +7,7 @@
 }
 
 
-/*** Spinner ***/
+/* Spinner */
 #spinner {
     opacity: 0;
     visibility: hidden;
@@ -30,7 +30,7 @@
 }
 
 
-/*** Heading ***/
+/* Heading */
 h1,
 h2,
 .fw-bold {
@@ -50,7 +50,7 @@ h6,
 }
 
 
-/*** Button ***/
+/* Button */
 .btn {
     font-weight: 500;
     transition: .5s;
@@ -87,7 +87,7 @@ h6,
 }
 
 
-/*** Navbar ***/
+/* Navbar */
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f067";
@@ -208,7 +208,7 @@ h6,
 }
 
 
-/*** Hero Header ***/
+/* Hero Header */
 .hero-header {
     margin-bottom: 6rem;
     padding: 18rem 0;
@@ -236,7 +236,7 @@ h6,
 }
 
 
-/*** Section Title ***/
+/* Section Title */
 .section-title {
     position: relative;
     display: flex;
@@ -296,7 +296,7 @@ h6,
 }
 
 
-/*** Feature ***/
+/* Feature */
 .feature-item {
     transition: .5s;
 }
@@ -306,7 +306,7 @@ h6,
 }
 
 
-/*** About ***/
+/* About */
 .progress {
     height: 5px;
 }
@@ -317,7 +317,7 @@ h6,
 }
 
 
-/*** Fact ***/
+/* Fact */
 .fact {
     margin: 6rem 0;
     background:
@@ -336,20 +336,21 @@ h6,
 }
 
 
-/*** Service ***/
+/* Service */
 .service-item {
     position: relative;
     padding: 45px 30px;
-    background: var(--light);
+    background: #f1f3f4;
     overflow: hidden;
     transition: .5s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.service-item:hover {
+/* .service-item:hover {
     margin-top: -15px;
     padding-bottom: 60px;
     background: #354995;
-}
+} */
 
 .service-item .service-icon {
     margin: 0 auto 20px auto;
@@ -364,45 +365,53 @@ h6,
     transition: .5s;
 }
 
-.service-item:hover .service-icon {
+/* .service-item:hover .service-icon {
     color: var(--dark);
     background: url(../img/blob-secondary.png) center center no-repeat;
     background-size: contain;
-}
+} */
 
 .service-item h5,
 .service-item p {
     transition: .5s;
 }
 
-.service-item:hover h5,
+/* .service-item:hover h5,
 .service-item:hover p {
     color: #FFFFFF;
-}
+} */ 
 
 .service-item a.btn {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #354995;
-    background: #FFFFFF;
-    border-radius: 40px 40px 0 0;
+   
+    color: white;
+    background: #1c79f9;
     transition: .5s;
     z-index: 1;
 }
 
-.service-item a.btn:hover {
+
+/* .service-item a.btn:hover {
     color: var(--dark);
     background: var(--secondary);
-}
+} */
 
 .service-item:hover a.btn {
-    bottom: 0;
+        color: rgb(2, 2, 2);
+        background: #eceef6;
+        transition: .5s;
+        z-index: 1;
 }
 
-
-/*** Project Portfolio ***/
+/* .job-div:hover p strong{
+    color:#ffc107;
+}
+.job-div{
+    background: #e6d5ff
+} */
+job-text{
+    color:#1f1f9b;
+}
+/* Project Portfolio */
 #portfolio-flters li {
     display: inline-block;
     font-weight: 500;
@@ -445,9 +454,9 @@ h6,
 }
 
 
-/*** Newsletter ***/
+/* Newsletter */
 .newsletter {
-    margin: 6rem 0;
+    margin: 3rem 0;
     background:
         url(../img/blob-top-left.png),
         url(../img/blob-top-right.png),
@@ -464,7 +473,7 @@ h6,
 }
 
 
-/*** Testimonial ***/
+/* Testimonial */
 .testimonial-carousel .testimonial-item {
     padding: 0 30px 30px 30px;
 }
@@ -497,7 +506,7 @@ h6,
 }
 
 
-/*** Team ***/
+/* Team */
 .team-item .btn {
     color: var(--primary);
     background: #FFFFFF;
@@ -509,7 +518,7 @@ h6,
 }
 
 
-/*** Footer ***/
+/* Footer */
 .footer {
     margin-top: 6rem;
     padding-top: 9rem;
@@ -808,3 +817,10 @@ h6,
   }
 
 
+.btn-apply{
+    padding: 8px 25px; 
+    font-size: 1.25rem; 
+}
+/* .job-div:hover p strong{
+    color:#ffc107;
+} */

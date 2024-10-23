@@ -16,8 +16,6 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from .job_matching import recommend_job
-from .models import Resume
-
 
 skillset=[]
 
@@ -52,14 +50,7 @@ def upload_resume(request):
         email=extract_email(text)
         phone=extract_mobile_number(text)
 
-        resume_details = Resume(
-        original_filename=filename,
-        skills=skillset,  
-        email=email,
-        phone_number=phone)
-        resume_details.save()
-
-        recommend_job(skillset)
+        recommend_job(skillset,email,phone,filename,resume,Res_text)
        
         print(skillset)
         print(".........................")
@@ -149,4 +140,3 @@ def extract_mobile_number(text):
             return '+' + number
         else:
             return number
-

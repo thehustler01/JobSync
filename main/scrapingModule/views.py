@@ -89,3 +89,6 @@ def scrape_website(request):
     jobs = JobListing.objects.filter(scraped_for=job_title).order_by('-scraped_at')
 
     return render(request, 'jobList.html', {'jobs': jobs})
+
+def job_search_without_skill(request):
+    return render(request, 'jobs.html')

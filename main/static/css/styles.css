@@ -52,3 +52,102 @@ button:hover {
 #answerContainer {
     margin-top: 20px;
 }
+
+
+
+
+
+
+
+.card {
+    width: 320px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Lighter shadow for a subtle effect */
+    border: 1px solid #dfe6e9; /* Subtle border */
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+   
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+}
+.icon-container {
+    background-color: #4a69bd;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+}
+
+h3 {
+    font-size: 22px;
+    color: #2d3436;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 14px;
+    color: #636e72;
+    line-height: 1.5;
+}
+
+.job-details {
+    margin-top: 15px;
+    text-align: left;
+    border-top: 1px solid #dfe6e9;
+    padding-top: 15px;
+    margin-left: 26px;
+}
+
+.job-details p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Stylish font for job details */
+    font-size: 17px;
+    color: #333; /* Darker, modern gray color */
+    margin: 5px 0;
+}
+
+.job-details strong {
+    color: #1e3799; /* Darker, deep blue for job highlights */
+    font-weight: 600; /* Slightly bolder */
+}
+
+.card:hover {
+   
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    background-color: #354995; /* Dark blue theme background on hover */
+    color: white; /* Text color change to white on hover */
+    border: none; /* Remove border */
+/*    transform: scale(1.005);  */
+}
+
+.card:hover .icon-container {
+    background-color: #f39c12; /* Change to orange background for the icon on hover */
+}
+.card:hover h3 {
+    color: #ffffff; /* Change h3 color to white on hover */
+}
+.card:hover p {
+    color: #ffffff; /* Change paragraph color to white on hover */
+}
+.card:hover .job-details p {
+    color: #ecf0f1; /* Change job details text color to light gray on hover */
+}
+.card:hover .job-details strong {
+    color: #f39c12; /* Change strong text to orange on hover */
+}
+.icon{
+  font-size:10px;
+  color:blue;
+  margin:10px;
+}

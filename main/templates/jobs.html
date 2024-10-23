@@ -28,12 +28,14 @@
 
     <!-- Libraries Stylesheet -->
     <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"
+      rel="stylesheet"
+    />
     <link
       href="{% static 'lib/lightbox/css/lightbox.min.css' %}"
       rel="stylesheet"
     />
-
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
   </head>
@@ -57,9 +59,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav mx-auto py-0">
             <a href="index.html" class="nav-item nav-link">Home</a>
-            <a href="jobsearch.html" class="nav-item nav-link active"
-              >Job Search</a
-            >
+            <a href="jobs.html" class="nav-item nav-link active">Job Search</a>
             <a href="mockInterview.html" class="nav-item nav-link"
               >Mock Interview</a
             >
@@ -114,62 +114,40 @@
             <h1 class="text-center text-white mb-4">
               Search Jobs across Internet
             </h1>
-
-            <div class="position-relative w-100 mt-3">
-              <input
-                class="form-control border-0 rounded-pill w-100 ps-4 pe-5"
-                type="text"
-                placeholder="Enter Job Role"
-                style="height: 48px"
-              />
-              <button
-                type="button"
-                class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"
-              >
-                <i class="fa fa-paper-plane text-primary fs-4"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-xxl py-5">
-      <div class="container py-5 px-lg-5">
-        <div class="wow fadeInUp" data-wow-delay="0.1s">
-          <p class="section-title text-secondary justify-content-center"></p>
-          <h1 class="text-center mb-5">Jobs that aligns with your Resume ✨</h1>
-        </div>
-        <div class="row g-4">
-          {% if jobs %} {% for job in jobs %}
-          <div class="col-lg-4 col-md-6 wow" data-wow-delay="0.1s">
-            <div class="service-item d-flex flex-column text-center job-div">
-              <div class="service-icon flex-shrink-0">
-                <i class="fa fa-mail-bulk fa-2x"></i>
+            <form id="jobRoleForm" method="GET">
+              <div class="position-relative w-100 mt-3">
+                <input
+                  id="jobRoleInput"
+                  class="form-control border-0 rounded-pill w-100 ps-4 pe-5"
+                  type="text"
+                  placeholder="Enter Job Role"
+                  style="height: 48px"
+                />
+                <button
+                  type="button"
+                  class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2 send-btn"
+                  onclick="submitJobRoleForm()"
+                >
+                  <i class="fa fa-paper-plane text-primary fs-4"></i>
+                </button>
               </div>
-              <h5 class="mb-4">{{ job.title }}</h5>
-              <p>
-                <strong class="job-text">Company:</strong> {{ job.company }}
-              </p>
-              <p>
-                <strong class="job-text">Location:</strong> {{ job.location }}
-              </p>
-              <p><strong class="job-text">Description:</strong></p>
-              <p><strong class="job-text">Salary:</strong> {{ job.salary }}</p>
-              <a
-                href="{{ job.job_link }}"
-                class="btn btn-primary mt-auto btn-apply"
-                >Apply Now</a
-              >
-            </div>
+            </form>
           </div>
-          <!-- Grid column ends -->
-          {% endfor %} {% else %}
-          <p>No jobs available at the moment.</p>
-          {% endif %}
         </div>
-        <!-- Grid row ends -->
       </div>
     </div>
+    <script>
+      function submitJobRoleForm() {
+        const jobRole = document.getElementById("jobRoleInput").value;
+
+        if (jobRole) {
+          const encodedJobRole = encodeURIComponent(jobRole);
+          window.location.href = `/scrape_jobs/?role=${encodedJobRole}`;
+        } else {
+          alert("Please enter a job role before submitting.");
+        }
+      }
+    </script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

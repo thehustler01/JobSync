@@ -96,25 +96,61 @@
 
 
 // ##############################################   resume-section   #####################################################
-// Get the file input and file info elements
+
+
+
+const form = document.getElementById('resume-form');
+const pdfFrame = document.getElementById('pdf-container');
+const uploadButton = document.getElementById('upload-button');
+const selectFileButton = document.getElementById('select-file-button');
 const fileInput = document.getElementById('file-input');
 const fileInfo = document.getElementById('file-info');
 
-// Trigger file input when the upload button is clicked
-document.querySelector('.upload-btn').addEventListener('click', function() {
-    fileInput.click(); // Open file dialog
+// Trigger file input when 'Select Resume' button is clicked
+selectFileButton.addEventListener('click', () => {
+    fileInput.click();
 });
 
-// When a file is selected
-fileInput.addEventListener('change', function() {
+// Update file info on selection and trigger animation
+fileInput.addEventListener('change', () => {
     if (fileInput.files.length > 0) {
-        const fileName = fileInput.files[0].name;
-        fileInfo.textContent = `Selected file: ${fileName}`;
-        
-        // Start the animation once a file is uploaded
+        fileInfo.textContent = `Selected: ${fileInput.files[0].name}`;
         startAnimation();
     } else {
         fileInfo.textContent = 'No file selected';
+    }
+});
+
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    if (fileInput.files.length > 0) {
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Display the uploaded PDF
+                pdfFrame.src = data.pdf_url;
+
+                // Display parsed data if available
+                if (data.skillset) {
+                    displayParsedData(data.skillset);
+                }
+            } else {
+                alert(data.error);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+        alert('Please select a resume file.');
     }
 });
 
@@ -136,4 +172,30 @@ function startAnimation() {
     }, 1000); // Time same as the CSS animation duration
 }
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
+function displayParsedData(parsedData) {
+    const dataContainer = document.getElementById('parsed-data');
+    dataContainer.innerHTML = '';  // Clear previous data
+
+    const ul = document.createElement('ul');
+    for (const [key, value] of Object.entries(parsedData)) {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${key}:</strong> ${value}`;
+        ul.appendChild(li);
+    }
+    dataContainer.appendChild(ul);
+}

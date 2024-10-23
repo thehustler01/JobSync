@@ -1,49 +1,326 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume Upload</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
 
-      h2 {
-        color: #333;
-      }
+<head>
+    <meta charset="utf-8">
+    <title>JobSync-Home</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-      form {
-        margin-bottom: 20px;
-      }
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
-      #parsed-data {
-        margin-top: 20px;
-      }
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet"> 
 
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Upload Your Resume</h2>
-    <form id="resume-form" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input type="file" name="resume" accept=".pdf" required />
-      <button type="submit" id="upload-button">Upload</button>
-    </form>
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <div id="parsed-data"></div>
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
 
-    <iframe
-      id="pdf-container"
-      style="width: 100%; height: 500px"
-      frameborder="0"
-    ></iframe>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">JobSync</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'job_search_without_skill' %}" class="nav-item nav-link">Job Search</a>
+                        <a href="Interview.html" class="nav-item nav-link">Mock Interview</a>
+                    </div>
+                    <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary hero-header">
+              <div class="container px-lg-5">
+                  <div class="row g-5 align-items-end">
+                      <div class="col-lg-6 text-center text-lg-start">
+                          <h1 class="text-white mb-4 animated slideInDown">Bridging gap between Job Seekers and Employers</h1>
+                          <p class="text-white pb-3 animated slideInDown">Transform your career with us! From tailored skill recommendations to a vast array of job listings and mock interview practice, we’re here to help you succeed!</p>
+                          <a href="" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Scan Resume</a>
+                          <!-- <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a> -->
+                      </div>
+                      <div class="col-lg-6 text-center text-lg-start">
+                          <img class="img-fluid animated zoomIn" src="{% static 'img/hero.png' %}" alt="">
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-4">
+                    <div class="container">
+                        <!-- Progress Bar -->
+                        <div class="progress-bar">
+                            <div class="step active">
+                                <div class="circle">1</div>
+                                <p>Upload Resume</p>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step">
+                                <div class="circle">2</div>
+                                <p class="clr">Extract Skillset</p>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step">
+                                <div class="circle">3</div>
+                                <p>View Results</p>
+                            </div>
+                        </div>
+                    
+                        <!-- Resume Upload Section -->
+                        <div class="upload-section">
+                            <h2>Upload Your Resume</h2>
+                            <div class="upload-box" id="resume-form">
+                                <h3>Upload your resume to get started</h3>
+                                <form id="resume-form" action="/your-upload-endpoint/" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                    
+                                    <input type="file" id="file-input" name="resume" accept=".pdf,.docx" style="display: none;" required>
+                                    <button type="button" id="select-file-button" class="upload-btn">Select Resume</button>
+                    
+                                    <button type="submit" id="upload-button" class="upload-btn">Upload your resume</button>
+                    
+                                    <p class="file-info" id="file-info">No file selected</p>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="parsed-data"></div>
+                        <iframe id="pdf-container" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-xxl bg-primary fact py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
+                        <i class="fa fa-certificate fa-3x text-secondary mb-3"></i>
+                        <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                        <p class="text-white mb-0">Years Experience</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
+                        <i class="fa fa-users-cog fa-3x text-secondary mb-3"></i>
+                        <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                        <p class="text-white mb-0">Team Members</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
+                        <i class="fa fa-users fa-3x text-secondary mb-3"></i>
+                        <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                        <p class="text-white mb-0">Satisfied Clients</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
+                        <i class="fa fa-check fa-3x text-secondary mb-3"></i>
+                        <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                        <p class="text-white mb-0">Compleate Projects</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="section-title text-secondary justify-content-center"><span></span>Our Services<span></span></p>
+                    <h1 class="text-center mb-5">What Solutions We Provide</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Skill Recommendation</h5>
+                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <a class="btn btn-square" href="#"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-search fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Job Search</h5>
+                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-laptop-code fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Mock Interview</h5>
+                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="section-title text-secondary justify-content-center"></p>
+                    <h1 class="text-center mb-5">Our Objective</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-search fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Empower Job Seekers</h5>
+                            <p class="m-0">Provide users with personalized skill recommendations to enhance their qualifications, making them more competitive in the job market..</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-laptop-code fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Facilitate Job Matching</h5>
+                            <p class="m-0">Create a user-friendly job search interface that connects job seekers with relevant opportunities based on their skills, preferences, and career goals.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fab fa-facebook-f fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Enhance Interview Preparedness</h5>
+                            <p class="m-0">Offer mock interview sessions that provide users with real-time feedback and tips, boosting their confidence and improving their interview performance.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-mail-bulk fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Bridge the Skills-Opportunity Gap</h5>
+                            <p class="m-0">Ensure that skilled individuals don't miss out on opportunities due to lack of awareness by providing them with timely, tailored job recommendations that match their expertise.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-thumbs-up fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Promote Continuous Learning</h5>
+                            <p class="m-0">Encourage users to engage in continuous skill development through recommendations tailored to emerging industry trends.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fab fa-android fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Resume-Job Alignment</h5>
+                            <p class="m-0">Help users tailor their resumes to specific job descriptions by identifying missing skills and optimizing their content to match employer needs, improving their chances of landing the job.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+
+        <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-3">
+                        
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <p class="section-title text-white h5 mb-4">Quick Link<span></span></p>
+                        <a class="btn btn-link" href="">About Us</a>
+                        <a class="btn btn-link" href="">Contact Us</a>
+                        <a class="btn btn-link" href="">Privacy Policy</a>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container px-lg-5">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="index.html">JobSync</a>, All Right Reserved. 
+							
+							
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#" class="btn btn-lg btn-secondary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
     <script src="{% static 'js/script.js' %}"></script>
-  </body>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
 </html>
