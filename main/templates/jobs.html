@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Listings</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lib/lightbox/css/lightbox.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container-xxl position-relative p-0">
+      <nav
+        class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"
+      >
+        <a href="" class="navbar-brand p-0">
+          <h1 class="m-0">JobSync</h1>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+        >
+          <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav mx-auto py-0">
+            <a href="index.html" class="nav-item nav-link">Home</a>
+            <a href="jobs.html" class="nav-item nav-link active">Job Search</a>
+            <a href="mockInterview.html" class="nav-item nav-link"
+              >Mock Interview</a
+            >
+          </div>
+          <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
+            >Get Started</a
+          >
+        </div>
+      </nav>
+
+      <div class="container-xxl bg-primary hero-header">
+        <div class="container px-lg-5">
+          <div class="row g-5 align-items-end">
+            <div class="col-lg-6 text-center text-lg-start">
+              <h1 class="text-white mb-4 animated slideInDown">
+                Bridging gap between Job Seekers and Employers
+              </h1>
+              <p class="text-white pb-3 animated slideInDown">
+                Transform your career with us! From tailored skill
+                recommendations to a vast array of job listings and mock
+                interview practice, we’re here to help you succeed!
+              </p>
+              <a
+                href=""
+                class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft"
+                >Scan Resume</a
+              >
+              <!-- <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a> -->
+            </div>
+            <div class="col-lg-6 text-center text-lg-start">
+              <img
+                class="img-fluid animated zoomIn"
+                src="{% static 'img/hero.png' %}"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="container-xxl bg-primary newsletter py-5 wow fadeInUp"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-5 px-lg-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 text-center">
+            <p class="section-title text-white justify-content-center">
+              <span></span>JobSync<span></span>
+            </p>
+            <h1 class="text-center text-white mb-4">
+              Search Jobs across Internet
+            </h1>
+            <form id="jobRoleForm" method="GET">
+              <div class="position-relative w-100 mt-3">
+                <input
+                  id="jobRoleInput"
+                  class="form-control border-0 rounded-pill w-100 ps-4 pe-5"
+                  type="text"
+                  placeholder="Enter Job Role"
+                  style="height: 48px"
+                />
+                <button
+                  type="button"
+                  class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2 send-btn"
+                  onclick="submitJobRoleForm()"
+                >
+                  <i class="fa fa-paper-plane text-primary fs-4"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function submitJobRoleForm() {
+        const jobRole = document.getElementById("jobRoleInput").value;
+
+        if (jobRole) {
+          const encodedJobRole = encodeURIComponent(jobRole);
+          window.location.href = `/scrape_jobs/?role=${encodedJobRole}`;
+        } else {
+          alert("Please enter a job role before submitting.");
+        }
+      }
+    </script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+</body>
+</html>
