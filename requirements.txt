@@ -1,0 +1,11 @@
+Django==5.1.1
+djangorestframework==3.15.2
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
+google-generativeai==0.8.3
+nltk==3.9.1
+pyttsx3==2.98
+resume-parser==0.8.4
+spacy==3.8.2
+SpeechRecognition==3.10.4
+psycopg2==2.9.10
+psycopg2-binary==2.9.10
