@@ -17,6 +17,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from .job_matching import recommend_job
 
+
 skillset=[]
 
 @csrf_exempt
@@ -50,19 +51,23 @@ def upload_resume(request):
         email=extract_email(text)
         phone=extract_mobile_number(text)
 
-        recommend_job(skillset,email,phone,filename,resume,Res_text)
+        jobRole,miss_skill = recommend_job(skillset,email,phone,filename,resume,Res_text)
        
-        print(skillset)
+        # print(skillset)
         print(".........................")
         print(email)
         print(".........................")
         print(phone)
         print("..........................")
-        # print(name)
+
+        print(miss_skill)
+        print(jobRole)
        
         return JsonResponse({
             'success': True,
             'pdf_url': file_url,
+            'missing_skills' : miss_skill,
+            'suggested_job_role' : jobRole,
             'extracted_text':Res_text,
             'skillset':skillset
         })

@@ -7,7 +7,7 @@ from .models import Resume
 
 def recommend_job(skillset,email,phone,filename,resume,Res_text):
 
-    print(skillset,"in matchingggggggg")
+    print("\n\n User's extracted Skillset",skillset)
     User=skillset
     User=', '.join(User)
     path = os.path.join(settings.MEDIA_ROOT, 'job_role_matching.csv')
@@ -36,6 +36,7 @@ def recommend_job(skillset,email,phone,filename,resume,Res_text):
     User_skillset=list(map(str.lower,User_skillset))
 
     missing_skills = set(job_skillset) - set(User_skillset)
+    miss_skill = list(missing_skills)
 
     resume_details = Resume(
         original_filename=filename,
@@ -43,13 +44,14 @@ def recommend_job(skillset,email,phone,filename,resume,Res_text):
         skills=skillset,  
         email=email,
         phone_number=phone,
-        missing_skills=list(missing_skills),
+        missing_skills=miss_skill,
         required_skills=job_skillset,
         suggested_job_role=jobRole,
         )
     resume_details.save()
     
-    print(job_skillset)
-    print(User_skillset)
-    print(missing_skills)
-    print(jobRole)
+    print("\n\n Required skillset",job_skillset)
+    # print(User_skillset)
+    print("\n\n Missing Skills",missing_skills)
+    print("\n\n Job Role",jobRole)
+    return jobRole,miss_skill   
