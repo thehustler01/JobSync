@@ -53,6 +53,7 @@ h6,
 /*** Button ***/
 .btn {
     font-weight: 500;
+    background-color: #FBA504;
     transition: .5s;
 }
 
@@ -105,7 +106,7 @@ h6,
     font-family: 'Jost', sans-serif;
     font-size: 18px;
     font-weight: 500;
-    color: var(--light) !important;
+    color: white;
     outline: none;
     transition: .5s;
 }
@@ -117,7 +118,7 @@ h6,
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link.active {
-    color: var(--secondary) !important;
+    color: #FBA504;
 }
 
 .navbar-light .navbar-brand h1 {
@@ -198,7 +199,7 @@ h6,
 
     .navbar-light .btn {
         color: var(--dark);
-        background: #FFFFFF;
+        background: #FBA504;
     }
 
     .sticky-top.navbar-light .btn {
@@ -359,7 +360,7 @@ h6,
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--light);
+    color: white;
     background: url(../img/blob-primary.png) center center no-repeat;
     background-size: contain;
     transition: .5s;
@@ -704,6 +705,17 @@ job-text{
     margin-bottom: 30px;
     color: #333;
 }
+.Extracted-head {
+    margin-bottom: 30px;
+    font-size: 27px;
+    margin-top: 40px;
+    display: none;
+    color: #333;
+}
+.parsed-data{
+    display: none;
+}
+
 
 .upload-box {
     background-color: #f7f7f7;
@@ -824,3 +836,64 @@ job-text{
 /* .job-div:hover p strong{
     color:#ffc107;
 } */
+
+
+/* parsed data css */
+/* Container for Parsed Data */
+.parsed-data {
+    display: flex;
+    flex-wrap: wrap; /* Enable wrapping to next line */
+    gap: 20px; /* Space between each skill */
+    padding: 30px;
+    background-color: #f7f7f7;
+    border-radius: 15px;
+    margin-top: 20px;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+    animation: fadeInUp 0.7s ease-in-out both; /* Page load animation */
+}
+
+/* Skill Card Design */
+.parsed-data li {
+    list-style-type: none;
+    background-color: #27272a;
+    color: #f4f4f5;
+    margin: 10px 10px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-family: 'Google Sans', sans-serif;
+    font-size: 1rem;
+    display: inline-flex; /* Inline-flex for horizontal flow within items */
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0. 4s ease, background-color 0.3s ease;
+    opacity: 0; /* Initially hidden */
+    animation: fadeInUp 0.7s ease-in-out forwards; /* Slide-up fade-in */
+    animation-delay: calc(var(--i) * 0.1s); /* Staggered animation */
+}
+
+/* Skill Icon Styling */
+.parsed-data li .skill-icon {
+    font-size: 1.5rem;
+    color: #4caf50; /* Green color for icons */
+}
+
+/* Fade-in and Slide-up Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Layout */
+@media (max-width: 600px) {
+    .parsed-data {
+        justify-content: center; /* Center align on smaller screens */
+    }
+}

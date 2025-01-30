@@ -58,11 +58,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav mx-auto py-0">
-            <a href="index.html" class="nav-item nav-link">Home</a>
-            <a href="jobs.html" class="nav-item nav-link active">Job Search</a>
-            <a href="mockInterview.html" class="nav-item nav-link"
-              >Mock Interview</a
+            <a href="{% url 'resumeParser' %}" class="nav-item nav-link"
+              >Home</a
             >
+            <a
+              href="{% url 'job_search_without_skill' %}"
+              class="nav-item nav-link active"
+              >Job Search</a
+            >
+            <a href="{% url 'home' %}" class="nav-item nav-link"
+              >Mock Interview</a
+            >
           </div>
           <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
             >Get Started</a
@@ -142,7 +148,7 @@
 
         if (jobRole) {
           const encodedJobRole = encodeURIComponent(jobRole);
-          window.location.href = `/scrape_jobs/?role=${encodedJobRole}`;
+          window.location.href = `/scrape_jobs/?job_title=${encodedJobRole}`;
         } else {
           alert("Please enter a job role before submitting.");
         }

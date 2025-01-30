@@ -143,6 +143,12 @@ form.addEventListener('submit', function (event) {
                 // Display parsed data if available
                 if (data.skillset) {
                     displayParsedData(data.skillset);
+                    console.log(data.suggested_job_role);
+                    console.log(data.missing_skills);
+                    displayMissingSkills(data.missing_skills);
+                    // displayJobRole(data.suggested_job_role);
+                    
+
                 }
             } else {
                 alert(data.error);
@@ -187,15 +193,136 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// function displayParsedData(parsedData) {
+//     const dataContainer = document.getElementById('parsed-data');
+//     dataContainer.innerHTML = '';  // Clear previous data
+
+//     const ul = document.createElement('ul');
+//     for (const [key, value] of Object.entries(parsedData)) {
+//         const li = document.createElement('li');
+//         li.innerHTML = `<strong>${key}:</strong> ${value}`;
+//         ul.appendChild(li);
+//     }
+//     dataContainer.appendChild(ul);
+// }
 function displayParsedData(parsedData) {
-    const dataContainer = document.getElementById('parsed-data');
+    const dataContainer = document.getElementById('user-skills');
+    const header = document.getElementById('Extracted-head1');
+    header.style.display = "block";
     dataContainer.innerHTML = '';  // Clear previous data
 
     const ul = document.createElement('ul');
+    
+    let index = 0; // To calculate animation delay
     for (const [key, value] of Object.entries(parsedData)) {
         const li = document.createElement('li');
-        li.innerHTML = `<strong>${key}:</strong> ${value}`;
+        li.style.setProperty('--i', index); // Custom property for delay
+        li.innerHTML = `
+            <i class="fas fa-rocket"></i>
+            ${value}
+        `;
+        
         ul.appendChild(li);
+        index++;
     }
     dataContainer.appendChild(ul);
+    
+    // Trigger animation after adding elements
+    setTimeout(() => {
+        document.querySelectorAll('.parsed-data li').forEach(li => {
+            li.style.opacity = 1;
+        });
+    }, 100); // Small delay before animation starts
 }
+function displayMissingSkills(parsedData) {
+    const dataContainer = document.getElementById('missing-skills');
+    const header = document.getElementById('Extracted-head2');
+    header.style.display = "block";
+    dataContainer.innerHTML = '';  // Clear previous data
+
+    const ul = document.createElement('ul');
+    
+    let index = 0; // To calculate animation delay
+    for (const [key, value] of Object.entries(parsedData)) {
+        const li = document.createElement('li');
+        li.style.setProperty('--i', index); // Custom property for delay
+        li.innerHTML = `
+            <i class="fas fa-rocket"></i>
+            ${value}
+        `;
+        
+        ul.appendChild(li);
+        index++;
+    }
+    dataContainer.appendChild(ul);
+    
+    // Trigger animation after adding elements
+    setTimeout(() => {
+        document.querySelectorAll('.parsed-data li').forEach(li => {
+            li.style.opacity = 1;
+        });
+    }, 100); // Small delay before animation starts
+}
+
+
+
+// function displayMissingSkills(parsedData) {
+//     const dataContainer = document.getElementById('missing-skills');
+//     const header = document.getElementById('Extracted-head2');
+//     header.style.display = "block";
+
+//     dataContainer.innerHTML = '';  // Clear previous data
+
+//     const ul = document.createElement('ul');
+    
+//     let index = 0; // To calculate animation delay
+//     for (const [key, value] of Object.entries(parsedData)) {
+//         const li = document.createElement('li');
+//         li.style.setProperty('--i', index); // Custom property for delay
+//         li.innerHTML = `
+//             <i class="fas fa-rocket"></i>
+//             ${value}
+//         `;
+        
+//         ul.appendChild(li);
+//         index++;
+//     }
+//     dataContainer.appendChild(ul);
+    
+//     // Trigger animation after adding elements
+//     setTimeout(() => {
+//         document.querySelectorAll('.parsed-data li').forEach(li => {
+//             li.style.opacity = 1;
+//         });
+//     }, 100); // Small delay before animation starts
+// }
+// function displayJobRole(parsedData) {
+//     const dataContainer = document.getElementById('job-role');
+//     const header = document.getElementById('Extracted-head3');
+//     header.style.display = "block";
+
+//     dataContainer.innerHTML = '';  // Clear previous data
+
+//     const ul = document.createElement('ul');
+    
+//     let index = 0; // To calculate animation delay
+//     for (const [key, value] of Object.entries(parsedData)) {
+//         const li = document.createElement('li');
+//         li.style.setProperty('--i', index); // Custom property for delay
+//         li.innerHTML = `
+//             <i class="fas fa-rocket"></i>
+//             ${value}
+//         `;
+        
+//         ul.appendChild(li);
+//         index++;
+//     }
+//     dataContainer.appendChild(ul);
+    
+//     // Trigger animation after adding elements
+//     setTimeout(() => {
+//         document.querySelectorAll('.parsed-data li').forEach(li => {
+//             li.style.opacity = 1;
+//         });
+//     }, 100); // Small delay before animation starts
+// }

@@ -23,6 +23,7 @@ def scrape_website(request):
     chrome_options.add_argument("--window-size=1920x1080")
 
     service = Service('./drivers/chromedriver.exe')
+    # service = Service('C:\Program Files\Google\Chrome\Application\chrome.exe')
     
     # driver = webdriver.Chrome(service=service, options=chrome_options)
     driver = webdriver.Chrome(service=service)

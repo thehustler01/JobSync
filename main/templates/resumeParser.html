@@ -20,6 +20,8 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
     <!-- Libraries Stylesheet -->
     <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
@@ -54,10 +56,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'resumeParser' %}" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'job_search_without_skill' %}" class="nav-item nav-link">Job Search</a>
 
-                        <a href="Interview.html" class="nav-item nav-link">Mock Interview</a>
+                        <a href="{% url 'home' %}" class="nav-item nav-link">Mock Interview</a>
 
                     </div>
                     <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
@@ -117,8 +119,14 @@
                                 </form>
                             </div>
                         </div>
-                        <div id="parsed-data"></div>
-                        <iframe id="pdf-container" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                        <h2 class="Extracted-head" id="Extracted-head1">Your Extracted Skills</h2>
+                        <div class="parsed-data" id="user-skills"></div>
+                        <h2 class="Extracted-head" id="Extracted-head3">Recommended Job Role</h2>
+                        {% comment %} <div id="job-role"></div> {% endcomment %}
+                        <h2 class="Extracted-head" id="Extracted-head2">Missing Skills</h2>
+                        <div class="parsed-data" id="missing-skills"></div>
+                        <iframe id="pdf-container" style="width: 100%; height: 100vh; border: none; overflow: hidden;" frameborder="0"></iframe>
+
                 </div>
             </div>
         </div>
