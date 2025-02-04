@@ -60,7 +60,7 @@
                         <a href="{% url 'job_search_without_skill' %}" class="nav-item nav-link">Job Search</a>
 
                         <a href="{% url 'home' %}" class="nav-item nav-link">Mock Interview</a>
-
+                        <a href="{% url 'course_recommend' %}" class="nav-item nav-link">Courses</a>
                     </div>
                     <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
                 </div>
@@ -120,13 +120,12 @@
                             </div>
                         </div>
                         <h2 class="Extracted-head" id="Extracted-head1">Your Extracted Skills</h2>
-                        <div class="parsed-data" id="user-skills"></div>
+                        <div class="parsed-data-before" id="user-skills"></div>
                         <h2 class="Extracted-head" id="Extracted-head3">Recommended Job Role</h2>
-                        {% comment %} <div id="job-role"></div> {% endcomment %}
+                        <div class="parsed-data-before" id="job-role"></div>
                         <h2 class="Extracted-head" id="Extracted-head2">Missing Skills</h2>
-                        <div class="parsed-data" id="missing-skills"></div>
+                        <div class="parsed-data-before" id="missing-skills"></div>
                         <iframe id="pdf-container" style="width: 100%; height: 100vh; border: none; overflow: hidden;" frameborder="0"></iframe>
-
                 </div>
             </div>
         </div>

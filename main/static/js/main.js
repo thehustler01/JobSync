@@ -105,79 +105,115 @@ const uploadButton = document.getElementById('upload-button');
 const selectFileButton = document.getElementById('select-file-button');
 const fileInput = document.getElementById('file-input');
 const fileInfo = document.getElementById('file-info');
+let suggestedJobRole;
+const jobsearchButton=document.getElementById('jobSearchButton');
 
 // Trigger file input when 'Select Resume' button is clicked
-selectFileButton.addEventListener('click', () => {
-    fileInput.click();
-});
-
-// Update file info on selection and trigger animation
-fileInput.addEventListener('change', () => {
-    if (fileInput.files.length > 0) {
-        fileInfo.textContent = `Selected: ${fileInput.files[0].name}`;
-        startAnimation();
-    } else {
-        fileInfo.textContent = 'No file selected';
+if(selectFileButton)
+{
+    selectFileButton.addEventListener('click', () => {
+        fileInput.click();
+    });
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileInfo.textContent = `Selected: ${fileInput.files[0].name}`;
+            startAnimation();
+        } else {
+            fileInfo.textContent = 'No file selected';
+        }
+    });
+    function startAnimation() {
+        const step1 = document.querySelectorAll('.step')[0];
+        const step2 = document.querySelectorAll('.step')[1];
+        const lineBetween = document.querySelectorAll('.line')[0];
+    
+        // Keep circle 1 active
+        step1.classList.add('active');
+    
+        // Animate the line between circle 1 and circle 2
+        lineBetween.classList.add('animated-line');
+    
+        // Wait for the line animation to complete (1s), then activate circle 2
+        setTimeout(function() {
+            step2.classList.add('active');
+        }, 1000); // Time same as the CSS animation duration
     }
-});
-
-form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    if (fileInput.files.length > 0) {
-        const formData = new FormData(form);
-
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Display the uploaded PDF
-                pdfFrame.src = data.pdf_url;
-
-                // Display parsed data if available
-                if (data.skillset) {
-                    displayParsedData(data.skillset);
-                    console.log(data.suggested_job_role);
-                    console.log(data.missing_skills);
-                    displayMissingSkills(data.missing_skills);
-                    // displayJobRole(data.suggested_job_role);
-                    
-
-                }
-            } else {
-                alert(data.error);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    } else {
-        alert('Please select a resume file.');
-    }
-});
-
-// Function to animate the progress bar and activate circle 2
-function startAnimation() {
-    const step1 = document.querySelectorAll('.step')[0];
-    const step2 = document.querySelectorAll('.step')[1];
-    const lineBetween = document.querySelectorAll('.line')[0];
-
-    // Keep circle 1 active
-    step1.classList.add('active');
-
-    // Animate the line between circle 1 and circle 2
-    lineBetween.classList.add('animated-line');
-
-    // Wait for the line animation to complete (1s), then activate circle 2
-    setTimeout(function() {
-        step2.classList.add('active');
-    }, 1000); // Time same as the CSS animation duration
 }
 
+if(uploadButton)
+{
+    uploadButton.addEventListener('click', () => {
+        startAnimation2();
+    });
+    function startAnimation2() {
+        const step2 = document.querySelectorAll('.step')[1];
+        const step3 = document.querySelectorAll('.step')[2];
+        const lineBetween = document.querySelectorAll('.line')[1];
+        const parsedData=document.querySelectorAll('.parsed-data-before');
+        parsedData.forEach(ele=>{
+            ele.classList.remove('parsed-data-before');
+            ele.classList.add('parsed-data');
+        })
+    
+        // Keep circle 1 active
+        step2.classList.add('active');
+    
+        // Animate the line between circle 1 and circle 2
+        lineBetween.classList.add('animated-line');
+    
+        // Wait for the line animation to complete (1s), then activate circle 2
+        setTimeout(function() {
+            step3.classList.add('active');
+        }, 1000); // Time same as the CSS animation duration
+    }
+}
+
+// Update file info on selection and trigger animation
+
+if(form)
+{
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+    
+        if (fileInput.files.length > 0) {
+            const formData = new FormData(form);
+    
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("reachhhhh");
+                    console.log(data.skillset);
+                    // Display the uploaded PDF
+                    pdfFrame.src = data.pdf_url;
+    
+                    // Display parsed data if available
+                    if (data.skillset) {
+                        displayParsedData(data.skillset);
+                        displayMissingSkills(data.missing_skills);
+                        suggestedJobRole=data.suggested_job_role;
+                        sessionStorage.setItem("suggestedJobRole", suggestedJobRole);
+                        displayJobRole(data.suggested_job_role);   
+                    }
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            alert('Please select a resume file.');
+        }
+    });
+}
+
+
+// Function to animate the progress bar and activate circle 2
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -234,6 +270,20 @@ function displayParsedData(parsedData) {
         });
     }, 100); // Small delay before animation starts
 }
+function displayJobRole(jobRole) {
+    const dataContainer = document.getElementById('job-role');
+    const header = document.getElementById('Extracted-head3');
+    header.style.display = "block";  // Clear previous data
+    const div = document.createElement('div');
+    div.innerHTML = jobRole;
+    dataContainer.appendChild(div);
+    setTimeout(() => {
+        document.querySelectorAll('.parsed-data div').forEach(div => {
+            div.style.opacity = 1;
+        });
+    }, 100);
+}
+
 function displayMissingSkills(parsedData) {
     const dataContainer = document.getElementById('missing-skills');
     const header = document.getElementById('Extracted-head2');
@@ -264,7 +314,24 @@ function displayMissingSkills(parsedData) {
     }, 100); // Small delay before animation starts
 }
 
-
+if(jobsearchButton)
+{
+    jobsearchButton.addEventListener('click',()=> {
+        let jobrole=sessionStorage.getItem("suggestedJobRole");
+        console.log(jobrole+"?????");
+        if(!jobrole)
+        {
+            const encodedJobRole = encodeURIComponent("Software Engineer");
+            window.location.href = `/scrape_jobs/?job_title=${encodedJobRole}`;
+            alert("Please scan resume before submitting for personalized results.");
+        }
+        else{
+            const encodedJobRole = encodeURIComponent(jobrole);
+            window.location.href = `/scrape_jobs/?job_title=${encodedJobRole}`;
+        }
+    
+    });
+}
 
 // function displayMissingSkills(parsedData) {
 //     const dataContainer = document.getElementById('missing-skills');

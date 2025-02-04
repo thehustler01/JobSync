@@ -229,7 +229,25 @@ h6,
         center bottom;
     background-repeat: no-repeat;
 }
-
+.hero-header2{
+    margin-bottom: 6rem;
+    padding: 7rem 0;
+    background:
+        url(../img/blob-top-left.png),
+        url(../img/blob-top-right.png),
+        url(../img/blob-bottom-left.png),
+        url(../img/blob-bottom-right.png),
+        url(../img/blob-center.png),
+        url(../img/bg-bottom.png);
+    background-position:
+        left 0px top 0px,
+        right 0px top 0px,
+        left 0px bottom 0px,
+        right 0px bottom 0px,
+        center center,
+        center bottom;
+    background-repeat: no-repeat;
+}
 @media (max-width: 991.98px) {
     .hero-header {
         padding: 6rem 0 9rem 0;
@@ -612,7 +630,6 @@ job-text{
     text-align: center;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    bg-color:black;
 }
 
 /* Progress Bar */
@@ -712,7 +729,7 @@ job-text{
     display: none;
     color: #333;
 }
-.parsed-data{
+.parsed-data-before{
     display: none;
 }
 
@@ -848,11 +865,30 @@ job-text{
     background-color: #f7f7f7;
     border-radius: 15px;
     margin-top: 20px;
-    justify-content: flex-start; /* Align items to the left */
+    justify-content: center; /* Align items to the left */
     align-items: center;
     animation: fadeInUp 0.7s ease-in-out both; /* Page load animation */
 }
 
+.parsed-data div {
+    background-color: #27272a;
+    color: #f4f4f5;
+    margin: 10px 10px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    width:37rem;
+    font-family: 'Google Sans', sans-serif;
+    font-size: 1rem;
+    display: flex; /* Inline-flex for horizontal flow within items */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0. 4s ease, background-color 0.3s ease;
+    opacity: 0; /* Initially hidden */
+    animation: fadeInUp 0.7s ease-in-out forwards; /* Slide-up fade-in */
+    animation-delay: calc(var(--i) * 0.1s); /* Staggered animation */
+}
 /* Skill Card Design */
 .parsed-data li {
     list-style-type: none;
