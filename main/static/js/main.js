@@ -196,15 +196,10 @@ if(form)
                     // Display parsed data if available
                     if (data.skillset) {
                         displayParsedData(data.skillset);
-                        console.log(data.suggested_job_role);
-                        console.log(data.missing_skills);
                         displayMissingSkills(data.missing_skills);
                         suggestedJobRole=data.suggested_job_role;
-                        localStorage.setItem("suggestedJobRole", suggestedJobRole);
-                        console.log(suggestedJobRole+"}}}}}}}}}");
-                        displayJobRole(data.suggested_job_role);
-                        
-     
+                        sessionStorage.setItem("suggestedJobRole", suggestedJobRole);
+                        displayJobRole(data.suggested_job_role);   
                     }
                 } else {
                     alert(data.error);
@@ -322,11 +317,13 @@ function displayMissingSkills(parsedData) {
 if(jobsearchButton)
 {
     jobsearchButton.addEventListener('click',()=> {
-        let jobrole=localStorage.getItem("suggestedJobRole");
+        let jobrole=sessionStorage.getItem("suggestedJobRole");
         console.log(jobrole+"?????");
-        if(jobrole===undefined)
+        if(!jobrole)
         {
-            alert("Please scan resume before submitting.");
+            const encodedJobRole = encodeURIComponent("Software Engineer");
+            window.location.href = `/scrape_jobs/?job_title=${encodedJobRole}`;
+            alert("Please scan resume before submitting for personalized results.");
         }
         else{
             const encodedJobRole = encodeURIComponent(jobrole);
@@ -335,7 +332,6 @@ if(jobsearchButton)
     
     });
 }
-
 
 // function displayMissingSkills(parsedData) {
 //     const dataContainer = document.getElementById('missing-skills');

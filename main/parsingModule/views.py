@@ -16,10 +16,10 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from .job_matching import recommend_job
-
+from .course_recommendation import recommendCourse
 
 skillset=[]
-
+miss_skill=[]
 @csrf_exempt
 def upload_resume(request):
     if request.method == 'POST' and request.FILES['resume']:
@@ -50,7 +50,7 @@ def upload_resume(request):
         skillset=extract_skills(newNlp, noun_chunks)
         email=extract_email(text)
         phone=extract_mobile_number(text)
-
+        global miss_skill
         jobRole,miss_skill = recommend_job(skillset,email,phone,filename,resume,Res_text)
        
         # print(skillset)
@@ -145,3 +145,11 @@ def extract_mobile_number(text):
             return '+' + number
         else:
             return number
+
+
+def course_recommend(request):
+    print("passsedd value")
+    global miss_skill
+    print(miss_skill)
+    courses=recommendCourse(miss_skill)
+    return render(request,'course.html',{'course_data':courses})
