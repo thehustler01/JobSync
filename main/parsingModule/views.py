@@ -17,6 +17,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from .job_matching import recommend_job
 from .course_recommendation import recommendCourse
+from .chatbot import  get_chatbot_response
+
+import json
 
 skillset=[]
 miss_skill=[]
@@ -153,3 +156,25 @@ def course_recommend(request):
     print(miss_skill)
     courses=recommendCourse(miss_skill)
     return render(request,'course.html',{'course_data':courses})
+
+@csrf_exempt
+def chatbot(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user_message = data.get("message", "")
+
+            # Get previous chat history from session
+            chat_history = request.session.get("chat_history", [])
+            bot_reply = get_chatbot_response(user_message,chat_history)
+
+            # Update chat history and store in session
+            chat_history.append(f"User: {user_message}")
+            chat_history.append(f"Bot: {bot_reply}")
+            request.session["chat_history"] = chat_history
+
+            return JsonResponse({"reply": bot_reply})
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    return render(request, 'chat.html')

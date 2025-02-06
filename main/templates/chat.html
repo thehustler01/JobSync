@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JobSync Chatbot</title>
+    <link href="{% static 'css/chatbot.css' %}" rel="stylesheet" />
+    <script>
+      async function sendMessage() {
+        let userInput = document.getElementById("user-input").value;
+
+        let chatBox = document.getElementById("chat-box");
+        if (chatBox.innerHTML == "") {
+          console.log("Yes");
+        }
+        // Append user message
+        let userMessage = document.createElement("div");
+        userMessage.className = "message user-message";
+        userMessage.innerText = userInput;
+        chatBox.appendChild(userMessage);
+
+        document.getElementById("user-input").value = "";
+        // Scroll to bottom
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Simulating bot response (Replace with API call)
+        let botMessage = document.createElement("div");
+        botMessage.className = "message bot-message";
+        botMessage.innerText = "Thinking..."; // Placeholder
+
+        chatBox.appendChild(botMessage);
+
+        // Call backend API here
+        try {
+          let response = await fetch("/chatbot/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userInput }),
+          });
+          let data = await response.json();
+          botMessage.innerText = data.reply; // Update bot response
+          chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (error) {
+          botMessage.innerText = "Error connecting to chatbot.";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">Career Assistance Chatbot</div>
+      <div class="chatBox" id="chat-box"></div>
+      <div class="input-container">
+        <input type="text" id="user-input" placeholder="Type a message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </body>
+</html>
