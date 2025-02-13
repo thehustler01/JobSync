@@ -47,9 +47,6 @@
       .new-head {
         background-color: #354995;
       }
-      .new-head {
-        background-color: #354995;
-      }
       .search-container {
         text-align: center;
         margin-top: 10rem;
@@ -87,107 +84,100 @@
       }
     </style>
   </head>
-  <body>
-    <div class="container-xxl bg-white p-0">
-      <nav
-        class="navbar navbar-expand-lg navbar-light new-head px-4 px-lg-5 py-3 py-lg-0"
-      >
-        <a href="" class="navbar-brand p-0">
-          <h1 class="m-0">JobSync</h1>
-          <!-- <img src="img/logo.png" alt="Logo"> -->
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-        >
-          <span class="fa fa-bars"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <div class="navbar-nav mx-auto py-0">
-            <a href="{% url 'resumeParser' %}" class="nav-item nav-link"
-              >Home</a
-            >
-            <a
-              href="{% url 'job_search_without_skill' %}"
-              class="nav-item nav-link"
-              >Job Search</a
-            >
 
-            <a href="{% url 'home' %}" class="nav-item nav-link"
-              >Mock Interview</a
-            >
-            <a
-              href="{% url 'trending_courses' %}"
-              class="nav-item nav-link active"
-              >Courses</a
-            >
-            <a href="{% url 'chatbot' %}" class="nav-item nav-link"
-              >AI Mentor</a
-            >
-          </div>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light new-head px-4 px-lg-5 py-3 py-lg-0"
+    >
+      <a href="" class="navbar-brand p-0">
+        <h1 class="m-0">JobSync</h1>
+        <!-- <img src="img/logo.png" alt="Logo"> -->
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav mx-auto py-0">
+          <a href="{% url 'resumeParser' %}" class="nav-item nav-link active"
+            >Home</a
+          >
           <a
-            href="{% url 'course_recommend' %}"
-            class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
-            >Recommended Courses</a
+            href="{% url 'job_search_without_skill' %}"
+            class="nav-item nav-link"
+            >Job Search</a
           >
+
+          <a href="{% url 'home' %}" class="nav-item nav-link"
+            >Mock Interview</a
+          >
+          <a
+            href="{% url 'trending_courses' %}"
+            class="nav-item nav-link active"
+            >Courses</a
+          >
+          <a href="{% url 'chatbot' %}" class="nav-item nav-link">AI Mentor</a>
         </div>
-      </nav>
-      <div class="search-container">
-        <form action="" method="get">
-          <!-- Make sure to change the URL -->
-          <input
-            type="text"
-            id="courseSearchInput"
-            placeholder="Search..."
-            class="search-bar"
-          />
-          <button
-            type="button"
-            class="btn shadow-none position-absolute send-btn"
-            id="courseSearchButton"
-            onclick="courseSearchForm()"
-          >
-            <i class="fa fa-paper-plane text-primary fs-4"></i>
-          </button>
-        </form>
+        <a
+          href="{% url 'course_recommend' %}"
+          class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
+          >Recommended Courses</a
+        >
       </div>
-      <div class="container-xxl py-5 mt-5">
-        <div class="container py-5 px-lg-5">
-          <div class="wow fadeInUp mt-3" data-wow-delay="0.1s">
-            <p class="section-title text-secondary justify-content-center"></p>
-            <h2 class="text-center mb-5">{{ course_heading }} ✨</h2>
-          </div>
-          <div class="row g-4">
-            {% if course_data %} {% for course in course_data %}
-            <div class="col-lg-4 col-md-6 wow" data-wow-delay="0.1s">
-              <div class="service-item d-flex flex-column text-center job-div">
-                <h5 class="mb-4">{{ course.title }}</h5>
-                <p>
-                  <strong class="job-text">Skills:</strong> {{ course.skills }}
-                </p>
-                <p>
-                  <strong class="job-text">Details:</strong> {{ course.details}}
-                </p>
-                <p>
-                  <strong class="job-text">Rating:</strong> {{ course.rating }}
-                </p>
-                <a
-                  href="{{ course.url }}"
-                  class="btn btn-primary mt-auto btn-apply"
-                  >Apply Now</a
+    </nav>
+    {% comment %}
+    <div
+      class="container-xxl bg-primary newsletter py-5 wow fadeInUp"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-1 px-lg-7">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 text-center">
+            <form id="jobRoleForm" method="GET">
+              <div class="position-relative w-100">
+                <input
+                  id="jobRoleInput"
+                  class="form-control border-0 rounded-pill w-100 ps-4 pe-5"
+                  type="text"
+                  placeholder="Enter Job Role"
+                  style="height: 48px"
+                />
+                <button
+                  type="button"
+                  class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2 send-btn"
+                  onclick="submitJobRoleForm()"
                 >
+                  <i class="fa fa-paper-plane text-primary fs-4"></i>
+                </button>
               </div>
-            </div>
-            <!-- Grid column ends -->
-            {% endfor %} {% else %}
-            <p>No course available at the moment.</p>
-            {% endif %}
+            </form>
           </div>
-          <!-- Grid row ends -->
         </div>
       </div>
+    </div>
+    {% endcomment %}
+    <div class="search-container">
+      <form action="" method="get">
+        <!-- Make sure to change the URL -->
+        <input
+          type="text"
+          id="courseSearchInput"
+          placeholder="Search..."
+          class="search-bar"
+        />
+        <button
+          type="button"
+          class="btn shadow-none position-absolute send-btn"
+          id="courseSearchButton"
+          onclick="courseSearchForm()"
+        >
+          <i class="fa fa-paper-plane text-primary fs-4"></i>
+        </button>
+      </form>
     </div>
     <script>
       function courseSearchForm() {
@@ -213,5 +203,6 @@
 
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script></script>
   </body>
 </html>

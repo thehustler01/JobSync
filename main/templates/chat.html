@@ -9,9 +9,6 @@
         let userInput = document.getElementById("user-input").value;
 
         let chatBox = document.getElementById("chat-box");
-        if (chatBox.innerHTML == "") {
-          console.log("Yes");
-        }
         // Append user message
         let userMessage = document.createElement("div");
         userMessage.className = "message user-message";
@@ -48,10 +45,18 @@
   <body>
     <div class="chat-container">
       <div class="chat-header">Career Assistance Chatbot</div>
-      <div class="chatBox" id="chat-box"></div>
+      <div class="chatBox" id="chat-box">
+        <div class="message bot-message">
+          Hi there! Welcome to JobSync! I'm MentorX, your career guidance
+          assistant. How can I support you today?
+        </div>
+      </div>
       <div class="input-container">
         <input type="text" id="user-input" placeholder="Type a message..." />
-        <button onclick="sendMessage()">Send</button>
+        <button id="send-button" onclick="sendMessage()">Send</button>
+        <button id="end-button">
+          <a href="{% url 'resumeParser' %}">End Chat</a>
+        </button>
       </div>
     </div>
   </body>

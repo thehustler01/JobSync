@@ -14,3 +14,15 @@ class Resume(models.Model):
 
     def __str__(self):
         return f"{self.original_filename} by {self.email}"
+    
+
+class CourseListings(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.URLField()
+    skills = models.JSONField()
+    rating = models.FloatField()
+    details = models.JSONField()
+    scraped_for = models.CharField(default="trending") 
+
+    def __str__(self):
+        return self.title

@@ -16,7 +16,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from .job_matching import recommend_job
-from .course_recommendation import recommendCourse
+from .course_recommendation import recommendCourse, trendingCourses, searchCourse
 from .chatbot import  get_chatbot_response
 
 import json
@@ -155,7 +155,18 @@ def course_recommend(request):
     global miss_skill
     print(miss_skill)
     courses=recommendCourse(miss_skill)
-    return render(request,'course.html',{'course_data':courses})
+    return render(request,'course.html',{'course_data':courses , 'course_heading':"Customized Courses to Strengthen Your Weak Spots"})
+def trending_courses(request):
+    courses=trendingCourses()
+    return render(request,'course.html',{'course_data':courses, 'course_heading':"Top Trending Courses to Elevate Your Career"})
+
+def search_course(request):
+    course_title = request.GET.get('course_title', '')
+    courses=searchCourse(course_title)
+    return render(request,'course.html',{'course_data':courses, 'course_heading':"Searched Course"})
+def tempF(request):
+    return render(request,'temp.html')
+
 
 @csrf_exempt
 def chatbot(request):
