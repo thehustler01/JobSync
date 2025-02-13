@@ -22,7 +22,7 @@ def get_chatbot_response(user_message, chat_history):
         model = genai.GenerativeModel("gemini-pro")
 
         # Format chat history properly
-        formatted_history = "\n".join(chat_history)  
+        formatted_history = "\n".join(chat_history) 
         formatted_prompt = PROMPT_TEMPLATE.format(history=formatted_history, query=user_message)
 
         response = model.generate_content(formatted_prompt)

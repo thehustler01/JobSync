@@ -55,6 +55,7 @@ h6,
     font-weight: 500;
     background-color: #FBA504;
     transition: .5s;
+    color:white;
 }
 
 .btn:hover {
@@ -198,7 +199,8 @@ h6,
     }
 
     .navbar-light .btn {
-        color: var(--dark);
+        /* color: var(--dark); */
+        color:white;
         background: #FBA504;
     }
 
