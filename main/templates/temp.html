@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>JobSync-Home</title>
+    <title>Hiring Insights</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="keywords" />
     <meta content="" name="description" />
@@ -103,7 +103,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto py-0">
-          <a href="{% url 'resumeParser' %}" class="nav-item nav-link active"
+          <a href="{% url 'resumeParser' %}" class="nav-item nav-link "
             >Home</a
           >
           <a
@@ -111,13 +111,14 @@
             class="nav-item nav-link"
             >Job Search</a
           >
+          <a href="{% url 'hiring_process_insights' %}" class="nav-item nav-link active">Hiring Insights</a>
 
           <a href="{% url 'home' %}" class="nav-item nav-link"
             >Mock Interview</a
           >
           <a
             href="{% url 'trending_courses' %}"
-            class="nav-item nav-link active"
+            class="nav-item nav-link "
             >Courses</a
           >
           <a href="{% url 'chatbot' %}" class="nav-item nav-link">AI Mentor</a>
