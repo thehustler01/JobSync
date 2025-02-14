@@ -12,6 +12,8 @@ from bs4 import BeautifulSoup
 from django.shortcuts import render  
 from .models import JobListing  
 import time
+from django.shortcuts import render
+import google.generativeai as genai
  
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -131,3 +133,70 @@ def check_login_popup(driver):
 
 def job_search_without_skill(request):
     return render(request,'jobs.html')
+
+def hiring_process_insights(request):
+    return render(request,'hiringInsights.html')
+
+
+
+def hiring_process_insights(request):
+    insights = None
+
+    if request.method == "POST":
+        company_name = request.POST.get("company_name")
+        job_role = request.POST.get("job_role")
+        location = request.POST.get("location")
+
+        if not company_name or not job_role or not location:
+            return render(request, "hiringInsights.html", {"error": "All fields are required!"})
+
+        try:
+            # Configure Gemini AI
+            os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
+            genai.configure(api_key=os.environ["API_KEY"])
+            model = genai.GenerativeModel('gemini-1.5-flash-latest')
+
+            prompt = f"""
+            Generate a detailed and structured hiring guide for a {job_role} position at {company_name} in {location}.
+            If specific information about {company_name} is not available, provide general hiring trends and industry insights.
+
+            1. Company Overview:
+               - If {company_name} is well-known, provide details about its culture, work environment, and mission.
+               - If {company_name} is a startup or has limited data, give a general overview of what candidates can expect in a company of this size.
+
+            2. Salary Insights:
+               - Provide the expected salary range for {job_role} in {location} based on industry standards.
+               - Include salary variations by experience level (Entry, Mid, Senior).
+
+            3. Interview Process:
+               - Describe the typical interview structure for {job_role}.
+               - If {company_name} has publicly available hiring information, mention it.
+               - If data is limited, provide a general hiring framework used by similar companies.
+
+            4. Past Interview Questions:
+               - If available, list real questions asked in interviews at {company_name}.
+               - Otherwise, provide common industry-standard questions for {job_role}.
+
+            5. Key Topics to Prepare:
+               - List technical and behavioral topics candidates should focus on.
+               - Mention must-know concepts based on the job role.
+
+            6. Best Study Resources:
+               - Recommend useful books, courses, and platforms for interview preparation.
+
+            7. Candidate Insights and Common Mistakes:
+               - Share common challenges faced by candidates.
+               - Provide actionable advice for acing the hiring process.
+
+            Ensure the response is structured like an informative article rather than a direct answer to a prompt.
+            Avoid using asterisks or formatting symbols.
+            """
+
+            # Generate response
+            response = model.generate_content(prompt)
+            insights = response.text if response and hasattr(response, "text") else "No insights available."
+
+        except Exception as e:
+            return render(request, "hiring_insights.html", {"error": str(e)})
+
+    return render(request, "hiringInsights.html", {"insights": insights})
