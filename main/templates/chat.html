@@ -4,6 +4,45 @@
   <head>
     <title>JobSync Chatbot</title>
     <link href="{% static 'css/chatbot.css' %}" rel="stylesheet" />
+    <link href="{% static 'img/favicon.ico' %}" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'lib/lightbox/css/lightbox.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <style>
+      .new-head {
+        background-color: #354995;
+      }
+    </style>
     <script>
       async function sendMessage() {
         let userInput = document.getElementById("user-input").value;
@@ -43,6 +82,48 @@
     </script>
   </head>
   <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light new-head px-4 px-lg-5 py-3 py-lg-0"
+    >
+      <a href="" class="navbar-brand p-0">
+        <h1 class="m-0">JobSync</h1>
+        <!-- <img src="img/logo.png" alt="Logo"> -->
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav mx-auto py-0">
+          <a href="{% url 'resumeParser' %}" class="nav-item nav-link">Home</a>
+          <a
+            href="{% url 'job_search_without_skill' %}"
+            class="nav-item nav-link"
+            >Job Search</a
+          >
+
+          <a href="{% url 'home' %}" class="nav-item nav-link"
+            >Mock Interview</a
+          >
+          <a
+            href="{% url 'trending_courses' %}"
+            class="nav-item nav-link active"
+            >Courses</a
+          >
+          <a href="{% url 'chatbot' %}" class="nav-item nav-link">AI Mentor</a>
+        </div>
+        <a
+          href="{% url 'course_recommend' %}"
+          class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
+          >Recommended Courses</a
+        >
+      </div>
+    </nav>
+
     <div class="chat-container">
       <div class="chat-header">Career Assistance Chatbot</div>
       <div class="chatBox" id="chat-box">
