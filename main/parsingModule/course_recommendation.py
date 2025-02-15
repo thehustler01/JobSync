@@ -31,6 +31,7 @@ def recommendCourse(missing_skills):
         if(len(missing_skills)==0):
             missing_skills=["machine learning"]
         missing_skills=missing_skills[:5]
+        dic={}
         for skill in missing_skills:
             try:
                 encoded_skill = urllib.parse.quote(skill)
@@ -57,13 +58,14 @@ def recommendCourse(missing_skills):
                     skills = skills.split(":", 1)[1].strip() 
                     skills= skills[:100] + "..." if len(skills) > 100 else skills
                     course_data.append({"title": title, "url": link, "skills":skills, "rating":rating, "details":metadata})
+                dic[skill]=course_data[len(course_data)-1]["url"]
             except Exception as e:
                 print("Error:", e)
     except Exception as e:
         print("Error:", e)
     finally:
         driver.quit()
-    return course_data
+    return course_data,dic
 
 def trendingCourses():
     course_data=[]

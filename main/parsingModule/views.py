@@ -18,11 +18,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 from .job_matching import recommend_job
 from .course_recommendation import recommendCourse, trendingCourses, searchCourse
 from .chatbot import  get_chatbot_response
+from django.core.mail import send_mail
 
 import json
 
 skillset=[]
 miss_skill=[]
+dic={}
 @csrf_exempt
 def upload_resume(request):
     if request.method == 'POST' and request.FILES['resume']:
@@ -153,8 +155,11 @@ def extract_mobile_number(text):
 def course_recommend(request):
     print("passsedd value")
     global miss_skill
+    global dic
     print(miss_skill)
-    courses=recommendCourse(miss_skill)
+    courses,dic=recommendCourse(miss_skill)
+    print(dic)
+    send_skill_reminder()
     return render(request,'course.html',{'course_data':courses , 'course_heading':"Customized Courses to Strengthen Your Weak Spots"})
 def trending_courses(request):
     courses=trendingCourses()
@@ -187,3 +192,33 @@ def chatbot(request):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
     return render(request, 'chat.html')
+
+
+def send_skill_reminder():
+    email="###" #Replace with user email
+    subject = "Skill Improvement Recommendation"
+
+    skills_str = "\n".join([f"- {skill}" for skill, url in dic.items()])
+    skills_course_str = "\n".join([f"- {skill} - {url}" for skill, url in dic.items()])
+    message = f"""
+    Hello,
+
+    We noticed that you're missing the following skills for better job matches: 
+    {skills_str}
+
+    To boost your profile, we recommend these courses:
+
+    {skills_course_str}
+
+    🔗 Click the links above to start learning today!
+
+    Keep learning and growing!
+    🚀 Your dream job is just a step away! Use **JobSync** to match with the best opportunities, prepare for the jobs and stay ahead in your career.  
+    Let JobSync be your **Ultimate Career Assistant** - helping you **Grow, Learn, and Succeed**! 
+    
+    Best Regards,
+    Team JobSync
+    """
+
+    send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
+    return
