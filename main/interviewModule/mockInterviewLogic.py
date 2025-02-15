@@ -17,6 +17,7 @@ def generate_interview_questions(skills, job_role):
 def analyze_answer(answer):
     prompt = (
         f"Please analyze the following answer:\n\n{answer}\n"
+        "given answer is recorded through mic, ignore the gramatical mistakes while giving suggestion."
         "Provide concise suggestions for improvement in an ordered list, followed by an ideal answer in another ordered list."
     )
     
