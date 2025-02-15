@@ -164,8 +164,6 @@ def search_course(request):
     course_title = request.GET.get('course_title', '')
     courses=searchCourse(course_title)
     return render(request,'course.html',{'course_data':courses, 'course_heading':"Searched Course"})
-def tempF(request):
-    return render(request,'temp.html')
 
 
 @csrf_exempt
