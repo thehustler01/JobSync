@@ -19,7 +19,6 @@ from .job_matching import recommend_job
 from .course_recommendation import recommendCourse, trendingCourses, searchCourse
 from .chatbot import  get_chatbot_response
 from django.core.mail import send_mail
-import google.generativeai as genai
 
 import json
 
@@ -196,7 +195,7 @@ def chatbot(request):
 
 
 def send_skill_reminder():
-    email="officialshreyaj3@gmail.com" #Replace with user email
+    email="rishabhvaish2002@gmail.com" #Replace with user email
     subject = "Skill Improvement Recommendation"
 
     skills_str = "\n".join([f"- {skill}" for skill, url in dic.items()])
@@ -223,7 +222,3 @@ def send_skill_reminder():
 
     send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
     return
-
-
-def assessment(request):
-    return render(request, "assessment.html")
