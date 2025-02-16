@@ -5,8 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import re
 from django.http import JsonResponse
 
-os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
-genai.configure(api_key=os.environ["API_KEY"])
+genai.configure(api_key=os.getenv('GENAI_API_KEY'))
 
 @csrf_exempt
 def generate_mcqs(skill):

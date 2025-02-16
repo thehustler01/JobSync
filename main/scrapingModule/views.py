@@ -15,6 +15,7 @@ import time
 from django.shortcuts import render
 import google.generativeai as genai
 import re
+from django.conf import settings
  
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -101,16 +102,17 @@ def scrape_website(request):
 
     return render(request, 'jobList.html', {'jobs': jobs})
 
+
 def perform_login(driver):
     """Handles the login process."""
     try:
         driver.get("https://www.linkedin.com/login")
         
         email = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'username')))
-        email.send_keys("abhaykesarwani010@gmail.com")  # Replace with your secondary email
+        email.send_keys(settings.Linked_in_email)  # Replace with your secondary email
         
         password = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'password')))
-        password.send_keys("abhay123")  # Replace with your secondary password
+        password.send_keys(settings.Linked_in_pswd)  # Replace with your secondary password
         
         login_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
         login_button.click()
@@ -151,8 +153,7 @@ def hiring_process_insights(request):
 
         try:
             # Configure Gemini AI
-            os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
-            genai.configure(api_key=os.environ["API_KEY"])
+            genai.configure(api_key=os.getenv('GENAI_API_KEY'))
             model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
             prompt = f"""

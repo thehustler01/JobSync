@@ -8,8 +8,7 @@ import json
 import google.generativeai as genai
 
 # Set your API key here
-os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
-genai.configure(api_key=os.environ["API_KEY"])
+genai.configure(api_key=os.getenv('GENAI_API_KEY'))
 
 # Initialize text-to-speech engine
 engine = pyttsx3.init()

@@ -195,7 +195,7 @@ def chatbot(request):
 
 
 def send_skill_reminder():
-    email="rishabhvaish2002@gmail.com" #Replace with user email
+    email= settings.USER_EMAIL
     subject = "Skill Improvement Recommendation"
 
     skills_str = "\n".join([f"- {skill}" for skill, url in dic.items()])

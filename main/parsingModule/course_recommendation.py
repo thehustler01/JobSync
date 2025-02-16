@@ -30,7 +30,7 @@ def recommendCourse(missing_skills):
         # query = "machine+learning"
         if(len(missing_skills)==0):
             missing_skills=["machine learning"]
-        missing_skills=missing_skills[:5]
+        missing_skills=missing_skills[:2]
         dic={}
         for skill in missing_skills:
             try:

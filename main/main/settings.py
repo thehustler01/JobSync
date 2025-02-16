@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jjt9w80j_^tu$z##fh$$c@4s@+f3^o-@#i_&4sxct_su!7d+v^'
+SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jobsync_db',  
-        'USER': 'jobsync_user',  # PostgreSQL username
-        'PASSWORD': 'tiger',  
-        'HOST': 'localhost',  
-        'PORT': '5432',  
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),  
     }
 }
 
@@ -153,9 +153,16 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'abhaykesarwani010@gmail.com'  #Replace with email
-EMAIL_HOST_PASSWORD = 'hzaljdgwkhsffmkm'  #Replace with app pswd"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS") == "True"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+GENAI_API_KEY = os.getenv('GENAI_API_KEY')
+
+Linked_in_email=os.getenv("LINKED_IN_EMAIL")
+Linked_in_pswd= os.getenv("LINKED_IN_PASSWORD")
+
+USER_EMAIL= os.getenv("USER_EMAIL")
