@@ -145,79 +145,116 @@
         .submit-btn:hover {
             background-color: #185abc;
         }
-        /* Insights Section */
-        .insights-section {
-            margin-top: 30px;
-            padding: 25px;
-            background-color: #f1f3f4;
-            border-radius: 12px;
-            text-align: left;
-            font-family: 'Merriweather', serif; /* Professional Article Font */
-            line-height: 1.8;
-        }
-
-        /* Main Heading */
-        .insights-section h3 {
-            color: #1967d2;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        /* Paragraph Styling */
-        .insights-section p {
-            font-size: 1.1rem;
-            color: #5f6368;
-            margin-bottom: 12px;
-            text-align: justify;
-        }
-
-        #Career_goal {
-            width: 100%;
-            padding: 10px;
-            font-size: 1em;
-            border: 1px solid #ccc;  /* Add a border for visual clarity */
-            border-radius: 4px;
-        }
-
-        .roadmap-section {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .roadmap-content {
-            /*  Remove white-space: pre-wrap;  Let HTML handle formatting */
-        }
-
-        .roadmap-content h2 {
-            font-size: 1.5em;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            color: #333; /* Darken the heading */
-        }
-
-        .roadmap-content p {
-            line-height: 1.6;  /* Improve readability */
-            margin-bottom: 10px;
-        }
-
-        .roadmap-content ul {
-            list-style-type: disc;
-            margin-left: 20px;
-            margin-bottom: 10px;
-        }
-
-        .roadmap-content li {
-            margin-bottom: 5px;
-        }
-
-
         .roadmap-placeholder {
             margin-top: 20px;
         }
+
+
+
+        
+        .container {
+          max-width: 800px;
+          margin: 40px auto;
+          padding: 20px;
+          font-family: 'Arial', sans-serif;
+          color: #333;
+      }
+      
+      h2 {
+          text-align: center;
+          font-size: 26px;
+          color: #2a75c1;
+          margin-bottom: 15px;
+          font-weight: bold;
+      }
+      
+      .subheading {
+          text-align: center;
+          font-size: 16px;
+          color: #555;
+          margin-bottom: 25px;
+      }
+      
+      /* Phase Headings */
+      h3 {
+          font-size: 20px;
+          color: #fff;
+          background: #2a75c1;
+          padding: 12px;
+          border-radius: 8px;
+          margin: 50px 0 20px;
+          text-align: center;
+          position: relative;
+          font-weight: bold;
+      }
+      
+      /* Vertical Connector for Phases */
+      h3::before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: -25px;
+          width: 3px;
+          height: 25px;
+          transform: translateX(-50%);
+      }
+      
+      h3:first-of-type::before {
+          display: none; /* Remove line for first phase */
+      }
+      
+      /* Section Titles */
+      h4 {
+          font-size: 18px;
+          color: #2a75c1;
+          margin-top: 15px;
+          font-weight: bold;
+          padding-left: 10px;
+          box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+
+      }
+      h1{
+        font-weight:300 !important;
+        font-size:50px;
+      }
+      
+      /* List Styling */
+      ul {
+          list-style: none;
+          padding-left: 20px;
+          position: relative;
+      }
+      
+      ul li {
+          font-size: 15px;
+          padding: 8px 0;
+          border-left: 2px solid #b0d0f0;
+          padding-left: 12px;
+          margin-bottom: 5px;
+          position: relative;
+          text-align: left;
+      }
+      
+      /* Bullet Point (Soft Blue Dot) */
+      ul li::before {
+          content: "";
+          width: 10px;
+          height: 10px;
+          background: #2a75c1;
+          position: absolute;
+          left: -6px;
+          top: 12px;
+          border-radius: 50%;
+      }
+      
+      /* Roadmap Section Background */
+      .roadmap-section {
+          margin-top: 30px;
+          padding: 20px;
+          background: #f9fcff;
+          border-radius: 10px;
+          border: 1px solid #e0eaf5;
+      }
 
     </style>
   </head>
@@ -250,33 +287,6 @@
       </div>
       <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
     </nav>
-    {% comment %} <div class="container">
-      <h2>Career Roadmap</h2>
-      <p class="subheading">Empowering you to achieve your career goals with a clear, defined path.</p>
-      
-      {% if error %}
-          <p class="text-danger text-center">{{ error }}</p>
-      {% endif %}
-      
-      <form method="POST" class="form-section">
-          {% csrf_token %}
-          
-          <div class="form-group">
-              <input type="text" id="Career_goal" name="Career_goal" placeholder="Enter your Career Goal (e.g., Software Engineer, Project Manager)" required>
-          </div>            
-          <button type="submit" class="submit-btn">Get Roadmap</button>
-      </form>
-  
-      {% if roadmap %}
-      <div class="insights-section">
-          <h3>Carrer Roadmap</h3>
-          <div class="insight-content">
-              {{ roadmap|linebreaks }}
-          </div>
-      </div>
-      {% endif %}
-
-    </div> {% endcomment %}
     <div class="container">
       <h2>Career Roadmap</h2>
       <p class="subheading">Empowering you to achieve your career goals with a clear, defined path.</p>
@@ -296,7 +306,6 @@
   
       {% if roadmap %}
       <div class="roadmap-section">
-          <h3>Your Personalized Career Roadmap</h3>
           <div class="roadmap-content">
               {{ roadmap|safe }}  <!-- IMPORTANT:  Use |safe to render HTML -->
           </div>

@@ -80,7 +80,7 @@
       
       /* Header Styling */
       h2 {
-          font-size: 2rem;
+          font-size: 1.7rem;
           font-weight: 700;
           color: #1967d2;
           margin-bottom: 20px;
@@ -140,55 +140,61 @@
       .submit-btn:hover {
           background-color: #185abc;
       }
-      
-      {% comment %} /* Insights Section */
+
+
+      /* Classic Business - Professional & Structured */
       .insights-section {
-          margin-top: 30px;
-          padding: 20px;
-          background-color: #f1f3f4;
-          border-radius: 12px;
-          text-align: left;
+          background-color: #ffffff;
+          border: 1px solid #d3d3d3;
+          padding: 24px;
+          margin: 20px 0;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       }
       
       .insights-section h3 {
-          color: #1967d2;
-          font-size: 1.5rem;
-          margin-bottom: 10px;
-      }
-      
-      .insights-section p {
-          font-size: 1rem;
-          color: #5f6368;
-          line-height: 1.5;
-      } {% endcomment %}
-
-
-      /* Insights Section */
-      .insights-section {
-          margin-top: 30px;
-          padding: 25px;
-          background-color: #f1f3f4;
-          border-radius: 12px;
-          text-align: left;
-          font-family: 'Merriweather', serif; /* Professional Article Font */
-          line-height: 1.8;
-      }
-
-      /* Main Heading */
-      .insights-section h3 {
-          color: #1967d2;
+          color: #2d3e50;
           font-size: 1.8rem;
           font-weight: 700;
-          margin-bottom: 15px;
-          text-transform: uppercase;
-      }
-
-      /* Paragraph Styling */
-      .insights-section p {
-          font-size: 1.1rem;
-          color: #5f6368;
           margin-bottom: 12px;
-          text-align: justify;
+          margin-top:30px;
+          border-bottom: 3px solid #007bff;
+          padding-bottom: 6px;
+      }
+      #text{
+        padding-left: 16px;
+        position: relative;
+        font-size: 1rem;
+        color: #444;
+      }
+      
+      .insight-content ul {
+          list-style: none;
+          padding-left: 20px;
+      }
+      
+      .insight-content ul li {
+          padding-left: 16px;
+          position: relative;
+          font-size: 1rem;
+          color: #444;
+          text-align:left;
+      }
+      
+      .insight-content ul li::before {
+          content: "▹";
+          color: #007bff;
+          font-size: 1rem;
+          position: absolute;
+          left: 0;
+          top: 2px;
+      }
+      
+      .insights-section p {
+          line-height: 1.6;
+          font-size: 1.1rem;
+          color: #555;
+          text-align:left;
       }
 
     </style>
@@ -251,7 +257,7 @@
       <div class="insights-section">
           <h3>Hiring Insights</h3>
           <div class="insight-content">
-              {{ insights|linebreaks }}
+              {{ insights|safe }}
           </div>
       </div>
       {% endif %}

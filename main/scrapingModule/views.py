@@ -157,44 +157,60 @@ def hiring_process_insights(request):
             model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
             prompt = f"""
-            Generate a detailed and structured hiring guide for a {job_role} position at {company_name} in {location}.
-            If specific information about {company_name} is not available, provide general hiring trends and industry insights.
+            <h2>Hiring Guide for <span class="job-role">{job_role}</span> at <span class="company-name">{company_name}</span> in <span class="location">{location}</span></h2>
 
-            1. Company Overview:
-               - If {company_name} is well-known, provide details about its culture, work environment, and mission.
-               - If {company_name} is a startup or has limited data, give a general overview of what candidates can expect in a company of this size.
+            <h3>1. Company Overview</h3>
+            <p>If <span class="company-name">{company_name}</span> is well-known, provide details about its culture, work environment, and mission.</p>
+            <p>If <span class="company-name">{company_name}</span> is a startup or has limited data, give a general overview of what candidates can expect in a company of this size.</p>
 
-            2. Salary Insights:
-               - Provide the expected salary range for {job_role} in {location} based on industry standards.
-               - Include salary variations by experience level (Entry, Mid, Senior).
+            <h3>2. Salary Insights</h3>
+            <ul>
+            <li>Expected salary range for <span class="job-role">{job_role}</span> in <span class="location">{location}</span> based on industry standards.</li>
+            <li>Salary variations by experience level:
+            <ul>
+                <li><strong>Entry Level:</strong> [Insert range]</li>
+                <li><strong>Mid-Level:</strong> [Insert range]</li>
+                <li><strong>Senior Level:</strong> [Insert range]</li>
+            </ul>
+            </li>
+            </ul>
 
-            3. Interview Process:
-               - Describe the typical interview structure for {job_role}.
-               - If {company_name} has publicly available hiring information, mention it.
-               - If data is limited, provide a general hiring framework used by similar companies.
+            <h3>3. Interview Process</h3>
+            <ul>
+            <li>Typical interview structure for <span class="job-role">{job_role}</span>.</li>
+            <li>If <span class="company-name">{company_name}</span> has public hiring information, mention it.</li>
+            <li>If data is limited, provide a general hiring framework used by similar companies.</li>
+            </ul>
 
-            4. Past Interview Questions:
-               - If available, list real questions asked in interviews at {company_name}.
-               - Otherwise, provide common industry-standard questions for {job_role}.
+            <h3>4. Past Interview Questions</h3>
+            <ul>
+            <li>If available, list real questions asked in interviews at <span class="company-name">{company_name}</span>.</li>
+            <li>Otherwise, provide common industry-standard questions for <span class="job-role">{job_role}</span>.</li>
+            </ul>
 
-            5. Key Topics to Prepare:
-               - List technical and behavioral topics candidates should focus on.
-               - Mention must-know concepts based on the job role.
+            <h3>5. Key Topics to Prepare</h3>
+            <ul>
+            <li>Technical and behavioral topics candidates should focus on.</li>
+            <li>Must-know concepts based on the job role.</li>
+            </ul>
 
-            6. Best Study Resources:
-               - Recommend useful books, courses, and platforms for interview preparation.
+            <h3>6. Best Study Resources</h3>
+            <ul>
+            <li>Recommended books, courses, and platforms for interview preparation.</li>
+            </ul>
 
-            7. Candidate Insights and Common Mistakes:
-               - Share common challenges faced by candidates.
-               - Provide actionable advice for acing the hiring process.
+            <h3>7. Candidate Insights and Common Mistakes</h3>
+            <ul>
+            <li>Common challenges faced by candidates.</li>
+            <li>Actionable advice for acing the hiring process.</li>
+            </ul>
 
-            Ensure the response is structured like an informative article rather than a direct answer to a prompt.
-            Avoid using asterisks or formatting symbols.
             """
 
             # Generate response
             response = model.generate_content(prompt)
             insights = response.text if response and hasattr(response, "text") else "No insights available."
+            print(insights)
 
         except Exception as e:
             return render(request, "hiring_insights.html", {"error": str(e)})
@@ -211,56 +227,71 @@ def career_roadmap(request):
             return render(request, "careerRoadmap.html", {"error": "All fields are required!"})
 
         try:
-            # Configure Gemini AI
-            os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
-            genai.configure(api_key=os.environ["API_KEY"])
+            genai.configure(api_key=os.getenv('GENAI_API_KEY'))
             model = genai.GenerativeModel('gemini-1.5-flash-latest')
             
             prompt = f"""
-            You are a career advisor, providing clear and actionable roadmaps for students and early career professionals. Act as a friendly instructor guiding them on their career journey.
+            Given a career goal of <strong>{Career_goal}</strong>, generate a detailed career roadmap outlining the essential steps and time required to achieve this goal in phases. The roadmap should include:
 
-            The user wants to become a {Career_goal}. Generate a detailed, step-by-step roadmap to achieve this goal.
-
-            The roadmap MUST be broken down into well-defined sections using HTML heading tags (<h2> for section titles).  Use HTML paragraph tags (<p>) for regular text.  Use HTML unordered lists (<ul><li>) for lists of skills or steps.
-
-            Each step should be practical and easy to follow. Include specific skills to learn, resources to explore, and actions to take. Be specific.
-
-            Make sure each step is very detailed and also guide if there is any prerequisite to follow that step.
-
-            Here are the required sections and how to format them:
-
-            <h2>Foundational Skills and Knowledge</h2>
-            <p>What basic knowledge/skills are needed BEFORE starting? Be specific.  For example:  Basic understanding of programming concepts.  Strong communication skills.</p>
-
-            <h2>Education and Training</h2>
-            <p>Specific degrees, certifications, online courses, bootcamps, etc.  Include specific course/certification names if possible and explain why each is valuable.</p>
-
-            <h2>Skill Development</h2>
-            <p>Detailed list of technical and soft skills.  Use an HTML unordered list (<ul><li> for each skill).  For each skill, suggest ways to learn it.  For example:</p>
+            <h2>Skills to Learn</h2>
+            <p>List the core technical and soft skills required for this role:</p>
             <ul>
-            <li>Python: Learn through Codecademy, DataCamp, or freeCodeCamp</li>
-            <li>Communication Skills: Practice public speaking, take a communication workshop.</li>
+            <li>Technical Skills (e.g., programming languages, software tools, etc.)</li>
+            <li>Soft Skills (e.g., communication, problem-solving, teamwork)</li>
+            <li>Industry-specific knowledge (e.g., finance, healthcare, technology)</li>
+            </ul>
+
+            <h2>Learning Resources</h2>
+            <p>Suggest online courses, books, or platforms to acquire these skills:</p>
+            <ul>
+            <li><strong>Coursera</strong> – Offers comprehensive courses tailored to the career goal</li>
+            <li><strong>edX</strong> – Provides professional certificates in related fields</li>
+            <li><strong>Books</strong> – Relevant literature that covers theory and practical applications</li>
+            <li><strong>Online Communities</strong> – Platforms like StackOverflow, Reddit, and LinkedIn groups</li>
+            </ul>
+
+            <h2>Projects to Build</h2>
+            <p>Recommend practical projects to solidify knowledge and improve hands-on experience:</p>
+            <ul>
+            <li>Work on an open-source project to gain collaboration experience</li>
+            <li>Develop a portfolio showcasing your best work</li>
+            </ul>
+
+            <h2>Certifications (if applicable)</h2>
+            <p>Mention any industry-recognized certifications that can add value:</p>
+            <ul>
+            <li>Relevant industry certification </li>
+            <li>Course completion certificates from recognized platforms like Coursera or edX</li>
             </ul>
 
             <h2>Experience Building</h2>
-            <p>Internships, personal projects, volunteer work, etc.  Explain how each type of experience helps and provide examples. Give very specific guidance on creating personal projects that will be impressive.</p>
+            <p>Suggest internships, open-source contributions, or part-time work that can help gain practical exposure:</p>
+            <ul>
+            <li>Apply for internships in relevant fields to gain real-world experience</li>
+            <li>Contribute to open-source projects for portfolio building</li>
+            <li>Seek freelance or part-time work to build practical skills</li>
+            </ul>
 
-            <h2>Networking</h2>
-            <p>How to connect with professionals in the field.  Specific advice.  For example: Attend industry events. Join relevant LinkedIn groups. Reach out to alumni on LinkedIn for informational interviews.</p>
+            <h2>Interview Preparation</h2>
+            <p>Provide guidance on common interview topics, coding platforms for practice, and behavioral interview tips:</p>
+            <ul>
+            <li>Review technical questions related to the role and practice coding challenges</li>
+            <li>Prepare for behavioral interviews using the STAR method (Situation, Task, Action, Result)</li>
+            <li>Practice mock interviews with peers or mentors</li>
+            </ul>
 
-            <h2>Job Search Strategies</h2>
-            <p>Resume/cover letter tips, interview preparation, online job boards to use, etc. Provide some very specific advice.</p>
+            <h2>Career Progression</h2>
+            <p>Outline a typical career path and possible specializations in this field:</p>
+            <ul>
+            <li>Entry-Level Position</li>
+            <li>Mid-Level Position with increased responsibility</li>
+            <li>Senior-Level Role or Specialist Role</li>
+            <li>Transition into management or advanced specialization</li>
+            </ul>
 
-            <h2>Continuous Learning and Advancement</h2>
-            <p>How to stay up-to-date with industry trends and advance in their career over time. Mention any specific courses or certifications that are beneficial.</p>
+            <p>Ensure the roadmap is structured step-by-step, practical, and aligned with industry standards. Provide clear action points that a beginner can follow systematically. Word limit should be 400 words.</p>
 
-            Important:
-            *   The response is AI-generated and should be presented as such.
-            *   Focus on providing a practical, actionable, and easy-to-follow guide.
-            *   Do not include any introductory or concluding remarks. Only the roadmap itself.
-            *   Use valid HTML tags.  Do not use Markdown.
-
-            Here is the Roadmap:
+            Use valid HTML tags.  Do not use Markdown.
             """
 
 
