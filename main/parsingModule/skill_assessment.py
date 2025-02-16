@@ -108,15 +108,11 @@ def evaluate(request):
         print(correct_answers)
         print(type(user_answers))
         result=[]
-        explanation_list = []
-        correct_answers_list=[]
         score = sum(1 for q, a in user_answers.items() if a == correct_answers[q])
         for q, a in user_answers.items():
             if a == correct_answers[q]:
                 result.append(f"✅ Correct")
             else:
                 result.append(f"❌ Wrong")
-            explanation_list.append(f"{explanations.get(q, 'No explanation available.')}") 
-            correct_answers_list.append(f"{correct_answers.get(q, 'No explanation available.')}")
         total = len(correct_answers)
         return JsonResponse({"score": score, "total": total, "result":result, "explanations": explanations,"correct_answers":correct_answers })

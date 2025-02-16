@@ -222,3 +222,7 @@ def send_skill_reminder():
 
     send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
     return
+
+
+def assessment(request):
+    return render(request,'assessment.html')
