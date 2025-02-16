@@ -200,34 +200,6 @@ def hiring_process_insights(request):
 
     return render(request, "hiringInsights.html", {"insights": insights})
 
-# def career_roadmap(request):
-#     roadmap = None
-
-#     if request.method == "POST":
-#         Career_goal = request.POST.get("Career_goal")
-
-#         if not Career_goal:
-#             return render(request, "careerRoadmap.html", {"error": "All fields are required!"})
-
-#         try:
-#             # Configure Gemini AI
-#             os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
-#             genai.configure(api_key=os.environ["API_KEY"])
-#             model = genai.GenerativeModel('gemini-1.5-flash-latest')
-
-#             # prompt goes here
-
-#             # Generate response
-#             response = model.generate_content(prompt)
-#             roadmap = response.text if response and hasattr(response, "text") else "No roadmap available."
-
-#         except Exception as e:
-#             return render(request, "careerRoadmap.html", {"error": str(e)})
-
-#     return render(request, "careerRoadmap.html", {"roadmap": roadmap})
-
-
-
 def career_roadmap(request):
     roadmap = None
 

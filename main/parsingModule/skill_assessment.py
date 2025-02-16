@@ -14,7 +14,7 @@ def generate_mcqs(skill):
     Generates MCQ questions for a given skill using Gemini API.
     """
     prompt = f"""
-    Generate 5 multiple-choice questions (MCQs) on the skill: {skill}.
+    Generate 10 multiple-choice questions (MCQs) on the skill: {skill}.
     Each question should have 4 options, one correct answer, and an explanation.
     Format:
     Q: <question>
