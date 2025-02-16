@@ -1,0 +1,337 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hiring Insights</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'lib/lightbox/css/lightbox.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <style>
+      .new-head {
+        background-color: #354995;
+      }
+      .subheading {
+        font-size: 1.2rem;
+        color: #5f6368;
+        margin-bottom: 20px;
+      }
+        .content {
+          margin-top: 6rem; 
+          text-align: center;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+      
+        body {
+          font-family: 'Roboto', sans-serif;
+          background: #f8f9fa;
+          margin: 0;
+          padding: 80px;
+          color: #202124;
+        }
+        
+        /* Container styling */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        
+        /* Header Styling */
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1967d2;
+            margin-bottom: 20px;
+        }
+        
+        /* Form Section */
+        .form-section {
+            padding: 20px;
+            {% comment %} text-align: left; {% endcomment %}
+            justify-content: center; /* Aligns horizontally */
+            align-items: center; /* Aligns vertically */
+        }
+        
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #5f6368;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        
+        input:focus {
+            border-color: #1967d2;
+        }
+        
+        /* Submit Button */
+        .submit-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #1967d2;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+      
+        
+        .submit-btn:hover {
+            background-color: #185abc;
+        }
+        /* Insights Section */
+        .insights-section {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #f1f3f4;
+            border-radius: 12px;
+            text-align: left;
+            font-family: 'Merriweather', serif; /* Professional Article Font */
+            line-height: 1.8;
+        }
+
+        /* Main Heading */
+        .insights-section h3 {
+            color: #1967d2;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Paragraph Styling */
+        .insights-section p {
+            font-size: 1.1rem;
+            color: #5f6368;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        #Career_goal {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;  /* Add a border for visual clarity */
+            border-radius: 4px;
+        }
+
+        .roadmap-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .roadmap-content {
+            /*  Remove white-space: pre-wrap;  Let HTML handle formatting */
+        }
+
+        .roadmap-content h2 {
+            font-size: 1.5em;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: #333; /* Darken the heading */
+        }
+
+        .roadmap-content p {
+            line-height: 1.6;  /* Improve readability */
+            margin-bottom: 10px;
+        }
+
+        .roadmap-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .roadmap-content li {
+            margin-bottom: 5px;
+        }
+
+
+        .roadmap-placeholder {
+            margin-top: 20px;
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light new-head px-4 px-lg-5 py-3 py-lg-0">
+      <a href="" class="navbar-brand p-0">
+        <h1 class="m-0">JobSync</h1>
+        <!-- <img src="img/logo.png" alt="Logo"> -->
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav mx-auto py-0">
+          <a href="{% url 'resumeParser' %}" class="nav-item nav-link "
+            >Home</a
+          >
+          <a
+            href="{% url 'job_search_without_skill' %}"
+            class="nav-item nav-link"
+            >Job Search</a
+          >
+          <a href="{% url 'career_roadmap' %}" class="nav-item nav-link active">Career Roadmap</a>
+          <a href="{% url 'hiring_process_insights' %}" class="nav-item nav-link ">Hiring Insights</a>
+
+          <a href="{% url 'home' %}" class="nav-item nav-link"
+            >Mock Interview</a
+          >
+          <a
+            href="{% url 'trending_courses' %}"
+            class="nav-item nav-link "
+            >Courses</a
+          >
+          <a href="{% url 'assessment' %}" class="nav-item nav-link ">Skill Evaluation</a>
+          <a href="{% url 'chatbot' %}" class="nav-item nav-link">AI Mentor</a>
+        </div>
+      </div>
+      <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+    </nav>
+    {% comment %} <div class="container">
+      <h2>Career Roadmap</h2>
+      <p class="subheading">Empowering you to achieve your career goals with a clear, defined path.</p>
+      
+      {% if error %}
+          <p class="text-danger text-center">{{ error }}</p>
+      {% endif %}
+      
+      <form method="POST" class="form-section">
+          {% csrf_token %}
+          
+          <div class="form-group">
+              <input type="text" id="Career_goal" name="Career_goal" placeholder="Enter your Career Goal (e.g., Software Engineer, Project Manager)" required>
+          </div>            
+          <button type="submit" class="submit-btn">Get Roadmap</button>
+      </form>
+  
+      {% if roadmap %}
+      <div class="insights-section">
+          <h3>Carrer Roadmap</h3>
+          <div class="insight-content">
+              {{ roadmap|linebreaks }}
+          </div>
+      </div>
+      {% endif %}
+
+    </div> {% endcomment %}
+    <div class="container">
+      <h2>Career Roadmap</h2>
+      <p class="subheading">Empowering you to achieve your career goals with a clear, defined path.</p>
+  
+      {% if error %}
+          <p class="text-danger text-center">{{ error }}</p>
+      {% endif %}
+  
+      <form method="POST" class="form-section">
+          {% csrf_token %}
+  
+          <div class="form-group">
+              <input type="text" id="Career_goal" name="Career_goal" placeholder="Enter your Career Goal (e.g., Software Engineer, Project Manager)" required>
+          </div>
+          <button type="submit" class="submit-btn">Get Roadmap</button>
+      </form>
+  
+      {% if roadmap %}
+      <div class="roadmap-section">
+          <h3>Your Personalized Career Roadmap</h3>
+          <div class="roadmap-content">
+              {{ roadmap|safe }}  <!-- IMPORTANT:  Use |safe to render HTML -->
+          </div>
+      </div>
+      {% endif %}
+    </div>
+  
+  
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html> 

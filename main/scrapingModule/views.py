@@ -140,8 +140,6 @@ def job_search_without_skill(request):
 def hiring_process_insights(request):
     return render(request,'hiringInsights.html')
 
-
-
 def hiring_process_insights(request):
     insights = None
 
@@ -202,3 +200,105 @@ def hiring_process_insights(request):
             return render(request, "hiring_insights.html", {"error": str(e)})
 
     return render(request, "hiringInsights.html", {"insights": insights})
+
+# def career_roadmap(request):
+#     roadmap = None
+
+#     if request.method == "POST":
+#         Career_goal = request.POST.get("Career_goal")
+
+#         if not Career_goal:
+#             return render(request, "careerRoadmap.html", {"error": "All fields are required!"})
+
+#         try:
+#             # Configure Gemini AI
+#             os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
+#             genai.configure(api_key=os.environ["API_KEY"])
+#             model = genai.GenerativeModel('gemini-1.5-flash-latest')
+
+#             # prompt goes here
+
+#             # Generate response
+#             response = model.generate_content(prompt)
+#             roadmap = response.text if response and hasattr(response, "text") else "No roadmap available."
+
+#         except Exception as e:
+#             return render(request, "careerRoadmap.html", {"error": str(e)})
+
+#     return render(request, "careerRoadmap.html", {"roadmap": roadmap})
+
+
+
+def career_roadmap(request):
+    roadmap = None
+
+    if request.method == "POST":
+        Career_goal = request.POST.get("Career_goal")
+
+        if not Career_goal:
+            return render(request, "careerRoadmap.html", {"error": "All fields are required!"})
+
+        try:
+            # Configure Gemini AI
+            os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
+            genai.configure(api_key=os.environ["API_KEY"])
+            model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            
+            prompt = f"""
+            You are a career advisor, providing clear and actionable roadmaps for students and early career professionals. Act as a friendly instructor guiding them on their career journey.
+
+            The user wants to become a {Career_goal}. Generate a detailed, step-by-step roadmap to achieve this goal.
+
+            The roadmap MUST be broken down into well-defined sections using HTML heading tags (<h2> for section titles).  Use HTML paragraph tags (<p>) for regular text.  Use HTML unordered lists (<ul><li>) for lists of skills or steps.
+
+            Each step should be practical and easy to follow. Include specific skills to learn, resources to explore, and actions to take. Be specific.
+
+            Make sure each step is very detailed and also guide if there is any prerequisite to follow that step.
+
+            Here are the required sections and how to format them:
+
+            <h2>Foundational Skills and Knowledge</h2>
+            <p>What basic knowledge/skills are needed BEFORE starting? Be specific.  For example:  Basic understanding of programming concepts.  Strong communication skills.</p>
+
+            <h2>Education and Training</h2>
+            <p>Specific degrees, certifications, online courses, bootcamps, etc.  Include specific course/certification names if possible and explain why each is valuable.</p>
+
+            <h2>Skill Development</h2>
+            <p>Detailed list of technical and soft skills.  Use an HTML unordered list (<ul><li> for each skill).  For each skill, suggest ways to learn it.  For example:</p>
+            <ul>
+            <li>Python: Learn through Codecademy, DataCamp, or freeCodeCamp</li>
+            <li>Communication Skills: Practice public speaking, take a communication workshop.</li>
+            </ul>
+
+            <h2>Experience Building</h2>
+            <p>Internships, personal projects, volunteer work, etc.  Explain how each type of experience helps and provide examples. Give very specific guidance on creating personal projects that will be impressive.</p>
+
+            <h2>Networking</h2>
+            <p>How to connect with professionals in the field.  Specific advice.  For example: Attend industry events. Join relevant LinkedIn groups. Reach out to alumni on LinkedIn for informational interviews.</p>
+
+            <h2>Job Search Strategies</h2>
+            <p>Resume/cover letter tips, interview preparation, online job boards to use, etc. Provide some very specific advice.</p>
+
+            <h2>Continuous Learning and Advancement</h2>
+            <p>How to stay up-to-date with industry trends and advance in their career over time. Mention any specific courses or certifications that are beneficial.</p>
+
+            Important:
+            *   The response is AI-generated and should be presented as such.
+            *   Focus on providing a practical, actionable, and easy-to-follow guide.
+            *   Do not include any introductory or concluding remarks. Only the roadmap itself.
+            *   Use valid HTML tags.  Do not use Markdown.
+
+            Here is the Roadmap:
+            """
+
+
+            # Generate response
+            response = model.generate_content(prompt)
+            roadmap = response.text if response and hasattr(response, "text") else "No roadmap available."
+
+        except Exception as e:
+            return render(request, "careerRoadmap.html", {"error": str(e)})
+
+    return render(request, "careerRoadmap.html", {"roadmap": roadmap})
+
+
