@@ -14,6 +14,7 @@ from .models import JobListing
 import time
 from django.shortcuts import render
 import google.generativeai as genai
+import re
  
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
