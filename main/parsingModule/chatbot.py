@@ -1,8 +1,7 @@
 import google.generativeai as genai
 import os
 
-os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
-genai.configure(api_key=os.environ["API_KEY"])
+genai.configure(api_key=os.getenv('GENAI_API_KEY'))
 def get_chatbot_response(user_message, chat_history):
     PROMPT_TEMPLATE = """
     You are a career guidance assistant on the JobSync platform.

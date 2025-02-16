@@ -2,8 +2,7 @@ import os
 import google.generativeai as genai
 
 # Set your API key here
-os.environ["API_KEY"] = 'AIzaSyDyU3NhJ7MhfZT0fUWJH8S-xU8ZLqe9r9M'
-genai.configure(api_key=os.environ["API_KEY"])
+genai.configure(api_key=os.getenv('GENAI_API_KEY'))
 
 def generate_interview_questions(skills, job_role):
     prompt = f"Generate a list of top asked interview questions for a {job_role} position focusing on the following skills: {', '.join(skills)}."
