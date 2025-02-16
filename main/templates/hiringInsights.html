@@ -210,27 +210,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto py-0">
-          <a href="{% url 'resumeParser' %}" class="nav-item nav-link "
-            >Home</a
-          >
-          <a
-            href="{% url 'job_search_without_skill' %}"
-            class="nav-item nav-link"
-            >Job Search</a
-          >
-          <a href="{% url 'career_roadmap' %}" class="nav-item nav-link ">Career Roadmap</a>
-          <a href="{% url 'hiring_process_insights' %}" class="nav-item nav-link active">Hiring Insights</a>
-
-          <a href="{% url 'home' %}" class="nav-item nav-link"
-            >Mock Interview</a
-          >
-          <a
-            href="{% url 'trending_courses' %}"
-            class="nav-item nav-link "
-            >Courses</a
-          >
-          <a href="{% url 'assessment' %}" class="nav-item nav-link">Skill Evaluation</a>
+          <a href="{% url 'resumeParser' %}" class="nav-item nav-link ">Home</a>
           <a href="{% url 'chatbot' %}" class="nav-item nav-link">AI Mentor</a>
+          <a href="{% url 'career_roadmap' %}" class="nav-item nav-link ">Career Roadmap</a>
+          <a href="{% url 'trending_courses' %}" class="nav-item nav-link">Courses</a>
+          <a href="{% url 'assessment' %}" class="nav-item nav-link">Skill Evaluation</a>
+          <a href="{% url 'job_search_without_skill' %}" class="nav-item nav-link">Job Search</a>
+          <a href="{% url 'hiring_process_insights' %}" class="nav-item nav-link active">Hiring Insights</a>
+          <a href="{% url 'home' %}" class="nav-item nav-link">Mock Interview</a>
         </div>
       </div>
       <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
