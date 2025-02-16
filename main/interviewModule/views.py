@@ -27,7 +27,7 @@ def generate_interview_questions(skills, job_role):
 
 def analyze_answer(answer):
     # Analyze the user's answer and suggest improvements.
-    prompt = f"Please analyze the following answer:\n\n{answer}\nProvide concise suggestions for improvement.Provide each suggestion on a new line without any headings,bullet points or extra formatting.only add some line-spacing"
+    prompt = f"Please analyze the following answer:\n\n{answer}\nProvide concise suggestions for improvement.answer which i am providing is recorded through mic so make sure you won't suggest any gramatical corrections in suggestion.Provide each suggestion on a new line without any headings,bullet points, asterisks for making bold or extra formatting.only add some line-spacing"
     model = genai.GenerativeModel('gemini-1.5-flash-latest')
     response = model.generate_content(prompt)
     return response.text.strip()
