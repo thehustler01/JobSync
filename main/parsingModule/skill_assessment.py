@@ -13,7 +13,7 @@ def generate_mcqs(skill):
     Generates MCQ questions for a given skill using Gemini API.
     """
     prompt = f"""
-    Generate 10 multiple-choice questions (MCQs) on the skill: {skill}.
+    Generate 5 multiple-choice questions (MCQs) on the skill: {skill}.
     Each question should have 4 options, one correct answer, and an explanation.
     Format:
     Q: <question>
@@ -25,7 +25,8 @@ def generate_mcqs(skill):
     Explanation: <Why this is correct?>
     Don't add asterisk keep it exactly in the format I gave you
     """
-    model = genai.GenerativeModel("gemini-pro")
+    
+    model = genai.GenerativeModel('gemini-1.5-pro')
     response = model.generate_content(prompt)
     clean_text = re.sub(r"\*", "", response.text)
     return clean_text
@@ -36,6 +37,7 @@ def get_questions(request):
     skill = request.POST.get("skill")
     questions_text = generate_mcqs(skill)
     print(questions_text)
+    questions_text = questions_text.replace("<", "&lt;").replace(">", "&gt;")
     questions = []
     q_list = questions_text.strip().split("\n\n")  
    

@@ -33,8 +33,8 @@ def scrape_website(request):
     service = Service('./drivers/chromedriver.exe')
     
     try:
-        # driver = webdriver.Chrome(service=service, options=chrome_options)
-        driver = webdriver.Chrome(service=service)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        # driver = webdriver.Chrome(service=service)
         
         # Load cookies if they exist
         if os.path.exists("linkedin_cookies.pkl"):
@@ -228,7 +228,8 @@ def career_roadmap(request):
 
         try:
             genai.configure(api_key=os.getenv('GENAI_API_KEY'))
-            model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            model = genai.GenerativeModel('gemini-1.5-pro')
             
             prompt = f"""
             Given a career goal of <strong>{Career_goal}</strong>, generate a detailed career roadmap outlining the essential steps and time required to achieve this goal in phases. The roadmap should include:
