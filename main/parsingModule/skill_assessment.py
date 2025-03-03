@@ -35,7 +35,7 @@ def get_questions(request):
    
     skill = request.POST.get("skill")
     questions_text = generate_mcqs(skill)
-    print(questions_text)
+    print(question_text)
     questions = []
     q_list = questions_text.strip().split("\n\n")  
    
