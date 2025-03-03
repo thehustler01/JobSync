@@ -1,5 +1,6 @@
 import google.generativeai as genai
 import os
+import re
 
 genai.configure(api_key=os.getenv('GENAI_API_KEY'))
 def get_chatbot_response(user_message, chat_history):
@@ -18,15 +19,17 @@ def get_chatbot_response(user_message, chat_history):
     Bot:
     """
     try:
-        model = genai.GenerativeModel("gemini-pro")
+        # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+        model = genai.GenerativeModel('gemini-1.5-pro')
 
         # Format chat history properly
         formatted_history = "\n".join(chat_history) 
         formatted_prompt = PROMPT_TEMPLATE.format(history=formatted_history, query=user_message)
 
         response = model.generate_content(formatted_prompt)
+        clean_text = re.sub(r"\*", "", response.text)
 
-        return response.text  # Return only the chatbot's response
+        return clean_text  # Return only the chatbot's response
 
     except Exception as e:
         return f"Error: {str(e)}"
