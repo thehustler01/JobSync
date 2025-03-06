@@ -134,7 +134,7 @@
             </div>
         </div>
 
-        <div class="container-xxl bg-primary fact py-5 wow fadeInUp" data-wow-delay="0.1s">
+        {% comment %} <div class="container-xxl bg-primary fact py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container py-5 px-lg-5">
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
@@ -159,7 +159,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
         
         <div class="container-xxl py-5">
             <div class="container py-5 px-lg-5">
@@ -168,23 +168,13 @@
                     <h1 class="text-center mb-5">What Solutions We Provide</h1>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="service-item d-flex flex-column text-center rounded">
                             <div class="service-icon flex-shrink-0">
-                                <i class="fas fa-check-circle fa-2x"></i>
+                                <i class="fa fa-laptop-code fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Skill Recommendation</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                            <a class="btn btn-square" href="#"><i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item d-flex flex-column text-center rounded">
-                            <div class="service-icon flex-shrink-0">
-                                <i class="fa fa-search fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Job Search</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">AI Mentor Guidance</h5>
+                            <p class="m-0">An AI Mentor that understand job market trends, answers user queries, and suggests relevant career options based on his interests.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -193,11 +183,82 @@
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-laptop-code fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Mock Interview</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">End Goal Roadmap</h5>
+                            <p class="m-0">Converts user's career goal into actionable steps, making it easier to track progress and stay motivated.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Skill Gap Analysis</h5>
+                            <p class="m-0">Analyzes user’s resume to suggest the most suitable job roles and highlight missing skills that need improvement.</p>
+                            <a class="btn btn-square" href="#"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-laptop-code fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Course Recommendations</h5>
+                            <p class="m-0">Provides personalized course suggestions, including trending courses and skill-bridging programs</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-laptop-code fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Skill Development Notifications</h5>
+                            <p class="m-0">Sends regular alerts and motivational nudges to keep user engaged in skill-building.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-search fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Skill-Based Assessments</h5>
+                            <p class="m-0">Offers quizzes and assessments to evaluate user's progress and help him improve weak areas.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-search fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Job Matching</h5>
+                            <p class="m-0">Scrapes and finds real-time job openings matching his skills and interests.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-search fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Hiring Insights</h5>
+                            <p class="m-0">Provides detailed information on company hiring processes, common interview questions, and job-specific requirements.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-search fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">Mock Interviews</h5>
+                            <p class="m-0">Simulates an interview by generating role-specific questions based on user's resume and offering feedback on his responses through AI generated videos.</p>
+                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -216,8 +277,8 @@
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-search fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Empower Job Seekers</h5>
-                            <p class="m-0">Provide users with personalized skill recommendations to enhance their qualifications, making them more competitive in the job market..</p>
+                            <h5 class="mb-3">Reduce Unemployability</h5>
+                            <p class="m-0">Helps students and job seekers gain industry-relevant skills, improving job readiness.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -226,8 +287,8 @@
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-laptop-code fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Facilitate Job Matching</h5>
-                            <p class="m-0">Create a user-friendly job search interface that connects job seekers with relevant opportunities based on their skills, preferences, and career goals.</p>
+                            <h5 class="mb-3">Empowers Career Growth</h5>
+                            <p class="m-0">Keeps users updated with evolving job market demands, ensuring long-term career success.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -236,8 +297,8 @@
                             <div class="service-icon flex-shrink-0">
                                 <i class="fab fa-facebook-f fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Enhance Interview Preparedness</h5>
-                            <p class="m-0">Offer mock interview sessions that provide users with real-time feedback and tips, boosting their confidence and improving their interview performance.</p>
+                            <h5 class="mb-3">Time and Effort Savings</h5>
+                            <p class="m-0">Streamlines the job-hunting process, making it more targeted and less overwhelming.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -246,8 +307,8 @@
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-mail-bulk fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Bridge the Skills-Opportunity Gap</h5>
-                            <p class="m-0">Ensure that skilled individuals don't miss out on opportunities due to lack of awareness by providing them with timely, tailored job recommendations that match their expertise.</p>
+                            <h5 class="mb-3"> Promotes Continuous Learning</h5>
+                            <p class="m-0">Encourages upskilling and career progression through personalized recommendations and weekly reminders.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -256,8 +317,8 @@
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-thumbs-up fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Promote Continuous Learning</h5>
-                            <p class="m-0">Encourage users to engage in continuous skill development through recommendations tailored to emerging industry trends.</p>
+                            <h5 class="mb-3">Boosts Economic Growth</h5>
+                            <p class="m-0">By preparing a skilled workforce, contributes to overall industry productivity.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -266,8 +327,8 @@
                             <div class="service-icon flex-shrink-0">
                                 <i class="fab fa-android fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Resume-Job Alignment</h5>
-                            <p class="m-0">Help users tailor their resumes to specific job descriptions by identifying missing skills and optimizing their content to match employer needs, improving their chances of landing the job.</p>
+                            <h5 class="mb-3">Bridge Urban and Rural Gap</h5>
+                            <p class="m-0">Provides equal access to career opportunities regardless of location or background.</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
