@@ -94,11 +94,11 @@
           <a href="{% url 'hiring_process_insights' %}" class="nav-item nav-link">Hiring Insights</a>
           <a href="{% url 'home' %}" class="nav-item nav-link active">Mock Interview</a>
         </div>
-        <a
+        {% comment %} <a
           href="{% url 'course_recommend' %}"
           class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
           >Recommended Courses</a
-        >
+        > {% endcomment %}
       </div>
     </nav>
     <div class="interview-container">
