@@ -6,21 +6,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const interviewForm = document.getElementById('interviewForm');
 
     if (interviewForm) {
-        document.getElementById('interviewForm').addEventListener('submit', function(event) {
+        document.getElementById('interviewForm').addEventListener('submit', function (event) {
             event.preventDefault();
-            
+
             // Get the input values
             const jobRole = document.getElementById('job_role').value.trim();
             const skills = document.getElementById('skills').value.split(',').map(skill => skill.trim());
-        
+
             // Get the input fields and button
             const jobRoleField = document.getElementById('job_role');
             const skillsField = document.getElementById('skills');
             const startButton = event.target.querySelector('button[type="submit"]');
             const interviewForm = document.getElementById('interviewForm');
-        
+
             // Fetch questions from server
-            fetch('/interview/', { 
+            fetch('/interview/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,53 +28,57 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({ job_role: jobRole, skills })
             })
-            .then(response => response.json())
-            .then(data => {
-                // Hide input fields and button
-                jobRoleField.style.display = 'none';
-                skillsField.style.display = 'none';
-                startButton.style.display = 'none';
-                
-                // Hide the whole form with a slide-out effect if needed
-                interviewForm.style.transition = 'transform 0.5s ease-in-out';
-                interviewForm.style.transform = 'translateX(-100%)';
-        
-                // Show questions container with a slide-in effect
-                setTimeout(function () {
-                    document.getElementById('questionsContainer').classList.remove('hidden');
-                    document.getElementById('questionsContainer').style.transition = 'transform 0.5s ease-in-out';
-                    document.getElementById('questionsContainer').style.transform = 'translateX(0)';
-                    questions = data.questions; 
-                    displayQuestion(); 
-                }, 500); 
-            })
-            .catch(err => {
-                alert('Error fetching questions, please try again.');
-                console.error(err);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    // Hide input fields and button
+                    jobRoleField.style.display = 'none';
+                    skillsField.style.display = 'none';
+                    startButton.style.display = 'none';
+
+                    // Hide the whole form with a slide-out effect if needed
+                    interviewForm.style.transition = 'transform 0.5s ease-in-out';
+                    interviewForm.style.transform = 'translateX(-100%)';
+
+                    // Show questions container with a slide-in effect
+                    setTimeout(function () {
+                        document.getElementById('questionsContainer').classList.remove('hidden');
+                        document.getElementById('questionsContainer').style.transition = 'transform 0.5s ease-in-out';
+                        document.getElementById('questionsContainer').style.transform = 'translateX(0)';
+                        questions = data.questions;
+                        displayQuestion();
+                    }, 500);
+                })
+                .catch(err => {
+                    alert('Error fetching questions, please try again.');
+                    console.error(err);
+                });
         });
-        
+
 
         function displayQuestion() {
             if (currentQuestionIndex < questions.length) {
                 const currentQuestion = questions[currentQuestionIndex];
                 document.getElementById('currentQuestion').innerHTML = `${currentQuestion}`;
-                
+
+                let videoContainer = document.getElementById("videoContainer");
+                videoContainer.style.display = "block";  // Show the video
+                document.getElementById("videoPlayer").play(); // Auto-play the video
+
                 // Show answer container and buttons
                 document.getElementById('answerContainer').classList.remove('hidden');
                 document.getElementById('recordButton').classList.remove('hidden');
-                document.getElementById('retryButton').classList.add('hidden'); 
-                document.getElementById('submitResponseButton').classList.add('hidden'); 
+                document.getElementById('retryButton').classList.add('hidden');
+                document.getElementById('submitResponseButton').classList.add('hidden');
 
                 // Read aloud the question
-                const utterance = new SpeechSynthesisUtterance(currentQuestion);
-                speechSynthesis.speak(utterance);
+                // const utterance = new SpeechSynthesisUtterance(currentQuestion);
+                // speechSynthesis.speak(utterance);
 
                 userAnswer = "";
                 document.getElementById('userAnswer').innerText = "";
                 document.getElementById('suggestionsContainer').classList.add('hidden');
                 document.getElementById('idealAnswerContainer').classList.add('hidden');
-                
+
                 handleRecording();
             } else {
                 alert("No more questions.");
@@ -86,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const recordButton = document.getElementById('recordButton');
             let isRecording = false;
 
-            recordButton.onclick = function() {
+            recordButton.onclick = function () {
                 if (!isRecording) {
                     isRecording = true;
                     recordButton.style.backgroundColor = '#1967d2'; // Mic Icon
@@ -106,11 +110,11 @@ document.addEventListener('DOMContentLoaded', function () {
             recognizer.start();
 
             recognizer.onresult = (event) => {
-                userAnswer = event.results[0][0].transcript; 
+                userAnswer = event.results[0][0].transcript;
 
                 document.getElementById('userAnswer').style.display = "block";
                 document.getElementById('userAnswer').innerText = userAnswer;
-                
+
                 document.getElementById('submitResponseButton').classList.remove('hidden');
             };
 
@@ -120,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         }
 
-        document.getElementById('submitResponseButton').addEventListener('click', function() {
+        document.getElementById('submitResponseButton').addEventListener('click', function () {
             submitResponse(userAnswer, currentQuestionIndex);
         });
 
@@ -133,19 +137,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({ answer, current_index: currentIndex })
             })
-            .then(response => response.json())
-            .then(data => {
-                displaySuggestions(data.suggestions, data.ideal_answer);
-            })
-            .catch(err => {
-                alert("Error analyzing answer, please try again.");
-                console.error(err);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    displaySuggestions(data.suggestions, data.ideal_answer);
+                })
+                .catch(err => {
+                    alert("Error analyzing answer, please try again.");
+                    console.error(err);
+                });
         }
 
         function displaySuggestions(suggestions, idealAnswer) {
             const suggestionsList = suggestions.split('\n').filter(Boolean).map(item => `<li>${item}</li>`).join('');
-           
+
             document.getElementById('suggestionsContainer').innerHTML =
                 `<strong>Suggestions</strong><ul>${suggestionsList}</ul>`;
             document.getElementById('suggestionsContainer').classList.remove('hidden');
@@ -154,41 +158,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 `<strong>Ideal Answer</strong><p>${idealAnswer}</p>`;
             document.getElementById('idealAnswerContainer').classList.remove('hidden');
 
+            let ansVideoContainer = document.getElementById("ansVideoContainer");
+            ansVideoContainer.style.display = "block";  // Show the video
+            document.getElementById("ansVideoPlayer").play(); // Auto-play the video
+
             document.getElementById('nextButton').classList.remove('hidden');
             document.getElementById('recordButton').classList.add('hidden');
             document.getElementById('submitResponseButton').classList.add('hidden');
+            document.getElementById('ansVideoContainer').classList.add('hidden');
+
         }
 
-        document.getElementById('nextButton').addEventListener('click', function() {
+        document.getElementById('nextButton').addEventListener('click', function () {
             currentQuestionIndex++;
             displayQuestion();
         });
 
-        document.getElementById('retryButton').addEventListener('click', function() {
-            userAnswer = ""; 
-            document.getElementById('userAnswer').innerText = ""; 
+        document.getElementById('retryButton').addEventListener('click', function () {
+            userAnswer = "";
+            document.getElementById('userAnswer').innerText = "";
             document.getElementById('recordButton').classList.remove('hidden');
         });
 
-        document.getElementById('quitButton').addEventListener('click', function() {
+        document.getElementById('quitButton').addEventListener('click', function () {
             if (confirm("Exiting the interview.")) {
                 location.reload();
-            } 
+            }
         });
 
-        function getCookie(name) { 
-            let cookieValue = null; 
-            if (document.cookie && document.cookie !== '') { 
-                const cookies = document.cookie.split(';'); 
-                for (let i = 0; i < cookies.length; i++) { 
-                    const cookie = cookies[i].trim(); 
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) { 
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); 
-                        break; 
-                    } 
-                } 
-            } 
-            return cookieValue; 
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
         }
     }
 });

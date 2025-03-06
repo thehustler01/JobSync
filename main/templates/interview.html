@@ -123,6 +123,12 @@
 
         <div id="questionsContainer" class="hidden">
             <div id="currentQuestion" class="question-box"></div>
+            <div id="videoContainer">
+              <video id="videoPlayer" width="640" height="360" controls>
+                  <source id="videoSource" src="{% static 'video/experience with ORM question.mp4' %}" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+            </div>
             <div id="answerContainer" class="hidden">
                 {% comment %} <strong>Your Answer:</strong> {% endcomment %}
                 <div id="userAnswer"></div>
@@ -135,6 +141,12 @@
             </div>
             <div id="suggestionsContainer" class="hidden"></div>
             <div id="idealAnswerContainer" class="hidden"></div>
+            <div id="ansVideoContainer" class="hidden">
+              <video id="ansVideoPlayer" width="640" height="360" controls>
+                  <source src="{% static 'video/Experience ORM Answer.mp4' %}" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+            </div>
             <button id="nextButton" class="hidden primary-btn">Next Question</button>
             <button id="quitButton" class="danger-btn">Quit</button>
         </div>
