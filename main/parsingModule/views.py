@@ -159,7 +159,7 @@ def course_recommend(request):
     print(miss_skill)
     courses,dic=recommendCourse(miss_skill)
     print(dic)
-    send_skill_reminder()
+    # send_skill_reminder()
     return render(request,'course.html',{'course_data':courses , 'course_heading':"Customized Courses to Strengthen Your Weak Spots"})
 def trending_courses(request):
     courses=trendingCourses()

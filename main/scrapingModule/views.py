@@ -232,63 +232,65 @@ def career_roadmap(request):
             model = genai.GenerativeModel('gemini-1.5-pro')
             
             prompt = f"""
-            Given a career goal of <strong>{Career_goal}</strong>, generate a detailed career roadmap outlining the essential steps and time required to achieve this goal in phases. The roadmap should include:
+            Given a career goal of <strong>{Career_goal}</strong>, generate a detailed career roadmap outlining the essential steps and time required to achieve this goal in phases.
 
-            <h2>Skills to Learn</h2>
-            <p>List the core technical and soft skills required for this role:</p>
-            <ul>
-            <li>Technical Skills (e.g., programming languages, software tools, etc.)</li>
-            <li>Soft Skills (e.g., communication, problem-solving, teamwork)</li>
-            <li>Industry-specific knowledge (e.g., finance, healthcare, technology)</li>
-            </ul>
+            In every phase try including:
+            <h3> Phase </h3>
+                <h2>Skills to Learn</h2>
+                <p>List the core technical and soft skills required for this role:</p>
+                <ul>
+                <li>Technical Skills (e.g., programming languages, software tools, etc.)</li>
+                <li>Soft Skills (e.g., communication, problem-solving, teamwork)</li>
+                <li>Industry-specific knowledge (e.g., finance, healthcare, technology)</li>
+                </ul>
 
-            <h2>Learning Resources</h2>
-            <p>Suggest online courses, books, or platforms to acquire these skills:</p>
-            <ul>
-            <li><strong>Coursera</strong> – Offers comprehensive courses tailored to the career goal</li>
-            <li><strong>edX</strong> – Provides professional certificates in related fields</li>
-            <li><strong>Books</strong> – Relevant literature that covers theory and practical applications</li>
-            <li><strong>Online Communities</strong> – Platforms like StackOverflow, Reddit, and LinkedIn groups</li>
-            </ul>
+                <h2>Learning Resources</h2>
+                <p>Suggest online courses, books, or platforms to acquire these skills:</p>
+                <ul>
+                <li><strong>Coursera</strong> – Offers comprehensive courses tailored to the career goal</li>
+                <li><strong>edX</strong> – Provides professional certificates in related fields</li>
+                <li><strong>Books</strong> – Relevant literature that covers theory and practical applications</li>
+                <li><strong>Online Communities</strong> – Platforms like StackOverflow, Reddit, and LinkedIn groups</li>
+                </ul>
 
-            <h2>Projects to Build</h2>
-            <p>Recommend practical projects to solidify knowledge and improve hands-on experience:</p>
-            <ul>
-            <li>Work on an open-source project to gain collaboration experience</li>
-            <li>Develop a portfolio showcasing your best work</li>
-            </ul>
+                <h2>Projects to Build</h2>
+                <p>Recommend practical projects to solidify knowledge and improve hands-on experience:</p>
+                <ul>
+                <li>Work on an open-source project to gain collaboration experience</li>
+                <li>Develop a portfolio showcasing your best work</li>
+                </ul>
 
-            <h2>Certifications (if applicable)</h2>
-            <p>Mention any industry-recognized certifications that can add value:</p>
-            <ul>
-            <li>Relevant industry certification </li>
-            <li>Course completion certificates from recognized platforms like Coursera or edX</li>
-            </ul>
+                <h2>Certifications (if applicable)</h2>
+                <p>Mention any industry-recognized certifications that can add value:</p>
+                <ul>
+                <li>Relevant industry certification </li>
+                <li>Course completion certificates from recognized platforms like Coursera or edX</li>
+                </ul>
 
-            <h2>Experience Building</h2>
-            <p>Suggest internships, open-source contributions, or part-time work that can help gain practical exposure:</p>
-            <ul>
-            <li>Apply for internships in relevant fields to gain real-world experience</li>
-            <li>Contribute to open-source projects for portfolio building</li>
-            <li>Seek freelance or part-time work to build practical skills</li>
-            </ul>
+                <h2>Experience Building</h2>
+                <p>Suggest internships, open-source contributions, or part-time work that can help gain practical exposure:</p>
+                <ul>
+                <li>Apply for internships in relevant fields to gain real-world experience</li>
+                <li>Contribute to open-source projects for portfolio building</li>
+                <li>Seek freelance or part-time work to build practical skills</li>
+                </ul>
 
-            <h2>Interview Preparation</h2>
-            <p>Provide guidance on common interview topics, coding platforms for practice, and behavioral interview tips:</p>
-            <ul>
-            <li>Review technical questions related to the role and practice coding challenges</li>
-            <li>Prepare for behavioral interviews using the STAR method (Situation, Task, Action, Result)</li>
-            <li>Practice mock interviews with peers or mentors</li>
-            </ul>
+                <h2>Interview Preparation</h2>
+                <p>Provide guidance on common interview topics, coding platforms for practice, and behavioral interview tips:</p>
+                <ul>
+                <li>Review technical questions related to the role and practice coding challenges</li>
+                <li>Prepare for behavioral interviews using the STAR method (Situation, Task, Action, Result)</li>
+                <li>Practice mock interviews with peers or mentors</li>
+                </ul>
 
-            <h2>Career Progression</h2>
-            <p>Outline a typical career path and possible specializations in this field:</p>
-            <ul>
-            <li>Entry-Level Position</li>
-            <li>Mid-Level Position with increased responsibility</li>
-            <li>Senior-Level Role or Specialist Role</li>
-            <li>Transition into management or advanced specialization</li>
-            </ul>
+                <h2>Career Progression</h2>
+                <p>Outline a typical career path and possible specializations in this field:</p>
+                <ul>
+                <li>Entry-Level Position</li>
+                <li>Mid-Level Position with increased responsibility</li>
+                <li>Senior-Level Role or Specialist Role</li>
+                <li>Transition into management or advanced specialization</li>
+                </ul>
 
             <p>Ensure the roadmap is structured step-by-step, practical, and aligned with industry standards. Provide clear action points that a beginner can follow systematically. Word limit should be 400 words.</p>
 

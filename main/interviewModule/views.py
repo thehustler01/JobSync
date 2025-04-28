@@ -21,7 +21,8 @@ def generate_interview_questions(skills, job_role):
     prompt = f"Generate a list of top asked interview questions for a {job_role} position focusing on the following skills: {', '.join(skills)}. Provide each question on a new line without any headings or extra formatting."
     model = genai.GenerativeModel('gemini-1.5-flash-latest')
     response = model.generate_content(prompt)
-    questions = response.text.strip().split('\n')
+    questions = "What is your experience with Django's ORM?"
+    questions = questions.strip().split('\n')
     return [question.strip() for question in questions if question.strip()]
 
 def analyze_answer(answer):

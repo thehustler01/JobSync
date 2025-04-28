@@ -24,7 +24,8 @@ def recommendCourse(missing_skills):
     chrome_options.add_argument("--disable-dev-shm-usage")
     service = Service('./drivers/chromedriver.exe')
     try:
-        driver = webdriver.Chrome(service=service)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        # driver = webdriver.Chrome(service=service)
         
         # Open Udemy search results page
         # query = "machine+learning"
