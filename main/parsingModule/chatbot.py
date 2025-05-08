@@ -20,7 +20,8 @@ def get_chatbot_response(user_message, chat_history):
     """
     try:
         # model = genai.GenerativeModel('gemini-1.5-flash-latest')
-        model = genai.GenerativeModel('gemini-1.5-pro')
+        # model = genai.GenerativeModel('gemini-1.5-pro')
+        model = genai.GenerativeModel('gemini-2.0-flash')
 
         # Format chat history properly
         formatted_history = "\n".join(chat_history) 

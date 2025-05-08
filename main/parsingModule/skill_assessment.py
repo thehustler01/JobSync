@@ -26,7 +26,8 @@ def generate_mcqs(skill):
     Don't add asterisk keep it exactly in the format I gave you
     """
     
-    model = genai.GenerativeModel('gemini-1.5-pro')
+    # model = genai.GenerativeModel('gemini-1.5-pro')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(prompt)
     clean_text = re.sub(r"\*", "", response.text)
     return clean_text

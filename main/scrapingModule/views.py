@@ -154,7 +154,8 @@ def hiring_process_insights(request):
         try:
             # Configure Gemini AI
             genai.configure(api_key=os.getenv('GENAI_API_KEY'))
-            model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            model = genai.GenerativeModel('gemini-2.0-flash')
 
             prompt = f"""
             <h2>Hiring Guide for <span class="job-role">{job_role}</span> at <span class="company-name">{company_name}</span> in <span class="location">{location}</span></h2>
@@ -229,7 +230,8 @@ def career_roadmap(request):
         try:
             genai.configure(api_key=os.getenv('GENAI_API_KEY'))
             # model = genai.GenerativeModel('gemini-1.5-flash-latest')
-            model = genai.GenerativeModel('gemini-1.5-pro')
+            # model = genai.GenerativeModel('gemini-1.5-pro')
+            model = genai.GenerativeModel('gemini-2.0-flash')
             
             prompt = f"""
             Given a career goal of <strong>{Career_goal}</strong>, generate a detailed career roadmap outlining the essential steps and time required to achieve this goal in phases.

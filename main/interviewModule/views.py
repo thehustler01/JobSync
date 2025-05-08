@@ -19,7 +19,8 @@ engine.setProperty('rate', 150)  # Set slower speed
 def generate_interview_questions(skills, job_role):
     # Generate interview questions based on skills and job role.
     prompt = f"Generate a list of top asked interview questions for a {job_role} position focusing on the following skills: {', '.join(skills)}. Provide each question on a new line without any headings or extra formatting."
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(prompt)
     questions = "What is your experience with Django's ORM?"
     questions = questions.strip().split('\n')
@@ -28,14 +29,16 @@ def generate_interview_questions(skills, job_role):
 def analyze_answer(answer):
     # Analyze the user's answer and suggest improvements.
     prompt = f"Please analyze the following answer:\n\n{answer}\nProvide concise suggestions for improvement.answer which i am providing is recorded through mic so make sure you won't suggest any gramatical corrections in suggestion.Provide each suggestion on a new line without any headings,bullet points, asterisks for making bold or extra formatting.only add some line-spacing"
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(prompt)
     return response.text.strip()
 
 def generate_ideal_answer(question, answer):
     # Generate an ideal answer based on the user's answer and the corresponding question.
     prompt = f"Based on the following question: \n\n'{question}'\n provide an ideal answer for this question for interview. Make sure that answer should be in two paragraph without any headings or extra formatting, only give line-spacing between paragraph.Should be easy to understand & Don't give too long answer "
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(prompt)
     return response.text.strip()
 

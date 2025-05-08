@@ -6,7 +6,8 @@ genai.configure(api_key=os.getenv('GENAI_API_KEY'))
 
 def generate_interview_questions(skills, job_role):
     prompt = f"Generate a list of top asked interview questions for a {job_role} position focusing on the following skills: {', '.join(skills)}."
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(prompt)
     
     # Clean up the response to ensure it only contains questions
@@ -20,7 +21,8 @@ def analyze_answer(answer):
         "Provide concise suggestions for improvement in an ordered list, followed by an ideal answer in another ordered list."
     )
     
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    # model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(prompt)
     
     # Clean and format the response
